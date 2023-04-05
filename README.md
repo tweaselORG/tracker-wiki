@@ -4,24 +4,22 @@
 
 <!-- TODO: A longer introduction to the module. -->
 
-## Installation
+## Build
 
-You can install tracker-wiki using yarn or npm:
+tracker-wiki requires the extended version of `hugo` with at least version 75 to be installed.
+
+Then you can run the following to build the HTML:
 
 ```sh
-yarn add tracker-wiki
-# or `npm i tracker-wiki`
+yarn
+yarn build
 ```
 
-<!--
-## Example usage
+If you want to run a development server, you can use:
 
-TODO: Describe the usage example(s).
-
-```ts
-// TODO: Example code.
+```sh
+yarn watch
 ```
--->
 
 ## License
 

@@ -1,0 +1,12 @@
+baseURL = '/'
+
+defaultContentLanguage = 'en'
+enableGitInfo = true
+
+[module]
+[[module.imports]]
+path = 'github.com/alex-shpak/hugo-book'
+
+[params]
+  BookSection = '/tracker'
+  BookTheme = 'auto'

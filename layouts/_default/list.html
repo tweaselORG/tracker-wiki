@@ -1,0 +1,16 @@
+{{ define "main" }}
+    <h1>{{ .Title }}</h1>
+
+    {{ with .Params.datenanfragenSlug }}<a href="https://datarequests.org/company/{{ . }}">Get tracker information datarequests.org.</a>{{ end }}<br>
+
+    {{ with .Params.exodusId }}<a href="https://reports.exodus-privacy.eu.org/de/trackers/{{ . }}">Get tracker information Exodus.</a>{{ end }}
+
+    {{ with .Params.adapters}}
+        <h2>Tracking adapters</h2>
+        <ul>
+            {{ range .}}
+                <li><a href="{{ (print $.Params.slug "/" . ) | absURL }}">{{ . }}</a></li>
+            {{ end }}
+        </ul>
+    {{ end }}
+{{ end }}

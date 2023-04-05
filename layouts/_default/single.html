@@ -1,0 +1,55 @@
+{{ define "main" }}
+    <h1>{{ .Title }}</h1>
+
+    {{ with .Params.endpointUrls}}
+        <h2>Endpoint URLs</h2>
+        <ul>
+            {{ range .}}
+                <li><code>{{ . }}</code></li>
+            {{ end }}
+        </ul>
+    {{ end }}
+
+    {{ with .Params.decodingSteps}}
+        <h2>Decoding steps</h2>
+        <ol>
+            {{ range .}}
+                <li><code>{{ .function }}</code></li>
+            {{ end }}
+        </ol>
+    {{ end }}
+
+    {{ with .Params.containedDataPaths}}
+        <h2>Possibly transmitted data</h2>
+        <table class="data-table">
+            <thead>
+                <tr><th>Property</th><th>Context</th><th>Path</th><th>Reasoning</th></tr>
+            </thead>
+            {{ range $property, $path := . }}
+                <!-- There is no type checking function in go template, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9  -->
+                {{ if eq (printf "%T" $path) "[]interface {}" }}
+                    {{ $length := len $path }}
+                    <tbody>
+                        {{ range $index, $element := $path }}
+                            <tr>
+                                {{ if eq $index 0 }}<td rowspan="{{ $length }}">{{ $property }}</td>{{ end }}
+                                <td>{{ .context }}</td>
+                                <td><code>{{ .path }}</code></td>
+                                <td>{{ .reasoning }}</td>
+                            </tr>
+                        {{ end }}
+                    </tbody>
+                {{ else }}
+                    <tbody>
+                        <tr>
+                            <td>{{ $property }}</td>
+                            <td>{{ .context }}</td>
+                            <td><code>{{ .path }}</code></td>
+                            <td>{{ .reasoning }}</td>
+                        </tr>
+                    </tbody>
+                {{ end }}
+            {{ end }}
+        </table>
+    {{ end }}
+{{ end }}
