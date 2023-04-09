@@ -1,5 +1,5 @@
 import { getDirname } from 'cross-dirname';
-import { mkdir, rm, writeFile } from 'fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
 import type { Tracker } from 'trackhar';
 import { adapters } from 'trackhar';
@@ -19,36 +19,50 @@ import { adapters } from 'trackhar';
         {}
     );
 
-    await rm(join(getDirname(), '../content/tracker'), { recursive: true, force: true });
-    await Promise.all(
-        Object.values(trackers).map(async (tracker) => {
-            // { recursive: true } behaves like mkdir -p
-            await mkdir(join(getDirname(), '../content/tracker', tracker.slug), { recursive: true });
-            await writeFile(
-                join(getDirname(), '../content/tracker', tracker.slug, '_index.md'),
-                JSON.stringify(tracker) + '\n&nbsp;',
-                'utf8'
-            );
-        })
-    ).then(() =>
-        Promise.all(
-            adapters
-                .map((adapter) => {
-                    delete adapter['match'];
-
-                    return {
-                        ...adapter,
-                        title: adapter.slug,
-                    };
-                })
-                .map((adapter) =>
-                    writeFile(
-                        join(getDirname(), '../content/tracker', adapter.tracker.slug, `${adapter.slug}.json.md`),
-                        JSON.stringify(adapter, (_, value) => (value instanceof RegExp ? value.toString() : value)) +
-                            '\n&nbsp;',
-                        'utf8'
-                    )
-                )
-        )
+    const languages = await readFile(join(getDirname(), '../config/_default/languages.json')).then((file) =>
+        Object.keys(JSON.parse(file.toString()))
     );
+
+    for (const language of languages) {
+        await rm(join(getDirname(), '../content', language, 'tracker'), { recursive: true, force: true });
+        await Promise.all(
+            Object.values(trackers).map(async (tracker) => {
+                // { recursive: true } behaves like mkdir -p
+                await mkdir(join(getDirname(), '../content', language, 'tracker', tracker.slug), { recursive: true });
+                await writeFile(
+                    join(getDirname(), '../content', language, 'tracker', tracker.slug, '_index.md'),
+                    JSON.stringify(tracker) + '\n&nbsp;',
+                    'utf8'
+                );
+            })
+        ).then(() =>
+            Promise.all(
+                adapters
+                    .map((adapter) => {
+                        delete adapter['match'];
+
+                        return {
+                            ...adapter,
+                            title: adapter.slug,
+                        };
+                    })
+                    .map((adapter) =>
+                        writeFile(
+                            join(
+                                getDirname(),
+                                '../content',
+                                language,
+                                'tracker',
+                                adapter.tracker.slug,
+                                `${adapter.slug}.json.md`
+                            ),
+                            JSON.stringify(adapter, (_, value) =>
+                                value instanceof RegExp ? value.toString() : value
+                            ) + '\n&nbsp;',
+                            'utf8'
+                        )
+                    )
+            )
+        );
+    }
 })();
