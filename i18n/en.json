@@ -14,33 +14,48 @@
     "tracker-list-tracker-adapters-heading": { "other": "Tracker adapters" },
 
     "decoding-step-function-parseQueryString": {
-        "one": "Parse `{{ .input }}` as a query string.",
-        "other": "Parse every element in `{{ .mapInput }}` as a query string."
+        "one": "Parse {{ .input }} as a query string.",
+        "other": "Parse every element in {{ .mapInput }} as a query string."
     },
     "decoding-step-function-parseJson": {
-        "one": "Parse `{{ .input }}` as JSON.",
-        "other": "Parse every element in `{{ .mapInput }}` as JSON."
+        "one": "Parse {{ .input }} as JSON.",
+        "other": "Parse every element in {{ .mapInput }} as JSON."
     },
     "decoding-step-function-decodeBase64": {
-        "one": "Decode `{{ .input }}` as a Base64 string.",
-        "other": "Decode every element in `{{ .mapInput }}` as a Base64 string."
+        "one": "Decode {{ .input }} as a Base64 string.",
+        "other": "Decode every element in {{ .mapInput }} as a Base64 string."
     },
     "decoding-step-function-decodeUrl": {
-        "one": "Decode `{{ .input }}` as a URL-encoded (percent-encoded) string.",
-        "other": "Decode every element in `{{ .mapInput }}` as a URL-encoded (percent-encoded) string."
+        "one": "Decode {{ .input }} as a URL-encoded (percent-encoded) string.",
+        "other": "Decode every element in {{ .mapInput }} as a URL-encoded (percent-encoded) string."
     },
     "decoding-step-function-decodeProtobuf": {
-        "one": "Decode `{{ .input }}` as a protocol buffer (Protobuf).",
-        "other": "Decode every element in `{{ .mapInput }}` as a protocol buffer (Protobuf)."
+        "one": "Decode {{ .input }} as a protocol buffer (Protobuf).",
+        "other": "Decode every element in {{ .mapInput }} as a protocol buffer (Protobuf)."
     },
     "decoding-step-function-ensureArray": {
-        "one": "Wrap `{{ .input }}` in an array if it isn’t one already.",
-        "other": "Wrap every element in `{{ .mapInput }}` in an array if it isn’t one already."
+        "one": "Wrap {{ .input }} in an array if it isn’t one already.",
+        "other": "Wrap every element in {{ .mapInput }} in an array if it isn’t one already."
     },
     "decoding-step-function-getProperty": {
-        "one": "Get the property at JSONPath `{{ .options.path }}` in `{{ .input }}`.",
-        "other": "Get the property at JSONPath `{{ .options.path }}` for every element in `{{ .mapInput }}`."
+        "one": "Get the property at JSONPath `{{ .options.path }}` in {{ .input }}.",
+        "other": "Get the property at JSONPath `{{ .options.path }}` for every element in {{ .mapInput }}."
     },
 
-    "decoding-step-store": { "other": "Store that in `{{ .output }}`." }
+    "decoding-step-store": { "other": "Store that in {{ .output }}." },
+
+    "decoding-step-identifier-prefix-body": { "other": "the request body" },
+    "decoding-step-identifier-prefix-query": { "other": "the query string in the request path" },
+    "decoding-step-identifier-prefix-header": { "other": "the request headers" },
+    "decoding-step-identifier-prefix-path": { "other": "the request path" },
+    "decoding-step-identifier-prefix-res.body": { "other": "the result for the request body" },
+    "decoding-step-identifier-prefix-res.query": { "other": "the result for the query string" },
+    "decoding-step-identifier-prefix-res.header": { "other": "the result for the request headers" },
+    "decoding-step-identifier-prefix-res.path": { "other": "the result for the request path" },
+    "decoding-step-identifier-prefix-variable": { "other": "the variable `{{ . }}`" },
+
+    "decoding-step-identifier-jsonpath": {
+        "other": "the property at JSONPath `{{ .path }}` in {{ .prefixDescription }}"
+    },
+    "decoding-step-identifier-path": { "other": "{{ .prefixDescription }} at `{{ .path }}`" }
 }
