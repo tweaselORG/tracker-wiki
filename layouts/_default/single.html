@@ -3,7 +3,7 @@
     <h1>{{ .Title }}</h1>
 
     {{ with .Params.endpointUrls}}
-    <h2>{{ i18n "tracker-single-endpoints-heading" }}</h2>
+    <h2>{{ T "tracker-single-endpoints-heading" }}</h2>
     <ul>
         {{ range .}}
             <li><code>{{ . }}</code></li>
@@ -12,11 +12,11 @@
     {{ end }}
 
     {{ with .Params.decodingSteps}}
-    <h2>{{ i18n "tracker-single-decoding-steps-heading" }}</h2>
+    <h2>{{ T "tracker-single-decoding-steps-heading" }}</h2>
     <div class="book-tabs">
         <input type="radio" class="toggle" name="tabs-decoding-steps" id="tabs-decoding-steps-description" checked="checked" />
         <label for="tabs-decoding-steps-description">
-            {{ i18n "tracker-single-decoding-steps-description" }}
+            {{ T "tracker-single-decoding-steps-description" }}
         </label>
         <div class="book-tabs-content markdown-inner">
             <ol>
@@ -28,7 +28,7 @@
 
         <input type="radio" class="toggle" name="tabs-decoding-steps" id="tabs-decoding-steps-pseudo-code" />
         <label for="tabs-decoding-steps-pseudo-code">
-            {{ i18n "tracker-single-decoding-steps-pseudo-code" }}
+            {{ T "tracker-single-decoding-steps-pseudo-code" }}
         </label>
         <div class="book-tabs-content markdown-inner">
             {{ $code := "" }}
@@ -46,14 +46,14 @@
     {{ end }}
 
     {{ with .Params.containedDataPaths }}
-    <h2>{{ i18n "tracker-single-transmitted-data-heading" }}</h2>
+    <h2>{{ T "tracker-single-transmitted-data-heading" }}</h2>
     <table class="data-table">
         <thead>
             <tr>
-                <th>{{ i18n "tracker-single-transmitted-data-table-head-property" }}</th>
-                <th>{{ i18n "tracker-single-transmitted-data-table-head-context" }}</th>
-                <th>{{ i18n "tracker-single-transmitted-data-table-head-path" }}</th>
-                <th>{{ i18n "tracker-single-transmitted-data-table-head-reasoning" }}</th>
+                <th>{{ T "tracker-single-transmitted-data-table-head-property" }}</th>
+                <th>{{ T "tracker-single-transmitted-data-table-head-context" }}</th>
+                <th>{{ T "tracker-single-transmitted-data-table-head-path" }}</th>
+                <th>{{ T "tracker-single-transmitted-data-table-head-reasoning" }}</th>
             </tr>
         </thead>
         {{ range $property, $path := . }}

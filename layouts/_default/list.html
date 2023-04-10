@@ -2,12 +2,12 @@
 <article class="markdown">
     <h1>{{ .Title }}</h1>
 
-    {{ with .Params.datenanfragenSlug }}<a href="https://{{ i18n "tracker-list-datenanfragen-link-domain" }}/company/{{ . }}">{{ i18n "tracker-list-datenanfragen-link" }}</a>{{ end }}<br>
+    {{ with .Params.datenanfragenSlug }}<a href="https://{{ T "tracker-list-datenanfragen-link-domain" }}/company/{{ . }}">{{ T "tracker-list-datenanfragen-link" }}</a>{{ end }}<br>
 
-    {{ with .Params.exodusId }}<a href="https://reports.exodus-privacy.eu.org/{{ $.Language }}/trackers/{{ . }}">{{ i18n "tracker-list-exodus-link" }}</a>{{ end }}
+    {{ with .Params.exodusId }}<a href="https://reports.exodus-privacy.eu.org/{{ $.Language }}/trackers/{{ . }}">{{ T "tracker-list-exodus-link" }}</a>{{ end }}
 
     {{ with .Params.adapters}}
-        <h2>{{ i18n "tracker-list-tracker-adapters-heading" }}</h2>
+        <h2>{{ T "tracker-list-tracker-adapters-heading" }}</h2>
         <ul>
             {{ range .}}
                 <li><a href="{{ (print "tracker/" $.Params.slug "/" . ) | absURL }}">{{ . }}</a></li>
