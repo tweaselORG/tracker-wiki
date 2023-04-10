@@ -43,6 +43,7 @@
     },
 
     "decoding-step-store": { "other": "Store that in {{ .output }}." },
+    "decoding-step-replace": { "other": "Replace the existing value." },
 
     "decoding-step-identifier-prefix-body": { "other": "the request body" },
     "decoding-step-identifier-prefix-query": { "other": "the query string in the request path" },

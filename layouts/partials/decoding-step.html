@@ -11,6 +11,9 @@
             "options" .options
         )
     ) | markdownify }}
-{{ $store := T "decoding-step-store" (dict "output" $output) | markdownify }}
+{{ $store := cond (eq .input .output)
+    (T "decoding-step-replace")
+    (T "decoding-step-store" (dict "output" $output) | markdownify)
+}}
 
 {{ $function }} {{ $store }}
