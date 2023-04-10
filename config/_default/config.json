@@ -12,5 +12,12 @@
     "params": {
         "BookSection": "/tracker",
         "BookTheme": "auto"
+    },
+    "markup": {
+        "highlight": {
+            "style": "base16-snazzy",
+            "lineNos": true,
+            "lineNumbersInTable": false
+        }
     }
 }

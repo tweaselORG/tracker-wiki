@@ -1,55 +1,87 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
+<article class="markdown">
+    <h1>{{ .Title }}</h1>
 
-{{ with .Params.endpointUrls}}
-<h2>{{ i18n "tracker-single-endpoints-heading" }}</h2>
-<ul>
-    {{ range .}}
-    <li><code>{{ . }}</code></li>
-    {{ end }}
-</ul>
-{{ end }} {{ with .Params.decodingSteps}}
-<h2>{{ i18n "tracker-single-decoding-steps-heading" }}</h2>
-<ol>
-    {{ range .}}
-    <li><code>{{ .function }}</code></li>
-    {{ end }}
-</ol>
-{{ end }} {{ with .Params.containedDataPaths}}
-<h2>{{ i18n "tracker-single-transmitted-data-heading" }}</h2>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>{{ i18n "tracker-single-transmitted-data-table-head-property" }}</th>
-            <th>{{ i18n "tracker-single-transmitted-data-table-head-context" }}</th>
-            <th>{{ i18n "tracker-single-transmitted-data-table-head-path" }}</th>
-            <th>{{ i18n "tracker-single-transmitted-data-table-head-reasoning" }}</th>
-        </tr>
-    </thead>
-    {{ range $property, $path := . }}
-    <!-- There is no type checking function in go template, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9  -->
-    {{ if eq (printf "%T" $path) "[]interface {}" }} {{ $length := len $path }}
-    <tbody>
-        {{ range $index, $element := $path }}
-        <tr>
-            {{ if eq $index 0 }}
-            <td rowspan="{{ $length }}">{{ $property }}</td>
-            {{ end }}
-            <td>{{ .context }}</td>
-            <td><code>{{ .path }}</code></td>
-            <td>{{ .reasoning }}</td>
-        </tr>
+    {{ with .Params.endpointUrls}}
+    <h2>{{ i18n "tracker-single-endpoints-heading" }}</h2>
+    <ul>
+        {{ range .}}
+            <li><code>{{ . }}</code></li>
         {{ end }}
-    </tbody>
-    {{ else }}
-    <tbody>
-        <tr>
-            <td>{{ $property }}</td>
-            <td>{{ .context }}</td>
-            <td><code>{{ .path }}</code></td>
-            <td>{{ .reasoning }}</td>
-        </tr>
-    </tbody>
-    {{ end }} {{ end }}
-</table>
-{{ end }} {{ end }}
+    </ul>
+    {{ end }}
+
+    {{ with .Params.decodingSteps}}
+    <h2>{{ i18n "tracker-single-decoding-steps-heading" }}</h2>
+    <div class="book-tabs">
+        <input type="radio" class="toggle" name="tabs-decoding-steps" id="tabs-decoding-steps-description" checked="checked" />
+        <label for="tabs-decoding-steps-description">
+            {{ i18n "tracker-single-decoding-steps-description" }}
+        </label>
+        <div class="book-tabs-content markdown-inner">
+            <ol>
+                {{ range . }}
+                    <li><code>{{ .function }}</code></li>
+                {{ end }}
+            </ol>
+        </div>
+
+        <input type="radio" class="toggle" name="tabs-decoding-steps" id="tabs-decoding-steps-pseudo-code" />
+        <label for="tabs-decoding-steps-pseudo-code">
+            {{ i18n "tracker-single-decoding-steps-pseudo-code" }}
+        </label>
+        <div class="book-tabs-content markdown-inner">
+            {{ $code := "" }}
+            {{ range . }}
+                {{ if isset . "input" }}
+                    {{ $code = printf "%s%s = %s(%s%s)\n" $code .output .function .input (cond (isset . "options") (printf ", %s" (.options | jsonify)) "") }}
+                {{ else }}
+                    {{ $code = printf "%s%s = %s.map(%s%s)\n" $code .output .function .mapInput (cond (isset . "options") (printf ", %s" (.options | jsonify)) "") }}
+                {{ end }}
+            {{ end }}
+
+            {{ highlight $code "actionscript3" }}
+        </div>
+    </div>
+    {{ end }}
+
+    {{ with .Params.containedDataPaths }}
+    <h2>{{ i18n "tracker-single-transmitted-data-heading" }}</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>{{ i18n "tracker-single-transmitted-data-table-head-property" }}</th>
+                <th>{{ i18n "tracker-single-transmitted-data-table-head-context" }}</th>
+                <th>{{ i18n "tracker-single-transmitted-data-table-head-path" }}</th>
+                <th>{{ i18n "tracker-single-transmitted-data-table-head-reasoning" }}</th>
+            </tr>
+        </thead>
+        {{ range $property, $path := . }}
+        <!-- There is no type checking function in go template, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9  -->
+        {{ if eq (printf "%T" $path) "[]interface {}" }} {{ $length := len $path }}
+        <tbody>
+            {{ range $index, $element := $path }}
+            <tr>
+                {{ if eq $index 0 }}
+                <td rowspan="{{ $length }}">{{ $property }}</td>
+                {{ end }}
+                <td>{{ .context }}</td>
+                <td><code>{{ .path }}</code></td>
+                <td>{{ .reasoning }}</td>
+            </tr>
+            {{ end }}
+        </tbody>
+        {{ else }}
+        <tbody>
+            <tr>
+                <td>{{ $property }}</td>
+                <td>{{ .context }}</td>
+                <td><code>{{ .path }}</code></td>
+                <td>{{ .reasoning }}</td>
+            </tr>
+        </tbody>
+        {{ end }} {{ end }}
+    </table>
+    {{ end }}
+</article>
+{{ end }}

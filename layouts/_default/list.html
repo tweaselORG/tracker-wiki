@@ -1,4 +1,5 @@
 {{ define "main" }}
+<article class="markdown">
     <h1>{{ .Title }}</h1>
 
     {{ with .Params.datenanfragenSlug }}<a href="https://{{ i18n "tracker-list-datenanfragen-link-domain" }}/company/{{ . }}">{{ i18n "tracker-list-datenanfragen-link" }}</a>{{ end }}<br>
@@ -13,4 +14,5 @@
             {{ end }}
         </ul>
     {{ end }}
+</article>
 {{ end }}

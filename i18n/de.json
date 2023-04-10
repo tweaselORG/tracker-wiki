@@ -1,6 +1,8 @@
 {
     "tracker-single-endpoints-heading": { "other": "Endpoint URLs" },
     "tracker-single-decoding-steps-heading": { "other": "Umwandlungsschritte" },
+    "tracker-single-decoding-steps-description": { "other": "Beschreibung" },
+    "tracker-single-decoding-steps-pseudo-code": { "other": "Pseudocode" },
     "tracker-single-transmitted-data-heading": { "other": "Möglicherweise übertragene Daten" },
     "tracker-single-transmitted-data-table-head-property": { "other": "Datentyp" },
     "tracker-single-transmitted-data-table-head-context": { "other": "Kontext" },
