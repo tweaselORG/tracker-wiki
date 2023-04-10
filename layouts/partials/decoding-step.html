@@ -1,0 +1,10 @@
+{{ (
+    T (printf "decoding-step-function-%s" .function)
+        (dict
+            "count" (cond (isset . "input") 1 2)
+            "input" .input
+            "mapInput" .mapInput
+            "options" .options
+        )
+    ) | markdownify }}
+{{ T "decoding-step-store" (dict "output" .output) | markdownify }}

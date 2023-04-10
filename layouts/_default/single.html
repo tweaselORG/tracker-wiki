@@ -21,7 +21,7 @@
         <div class="book-tabs-content markdown-inner">
             <ol>
                 {{ range . }}
-                    <li><code>{{ .function }}</code></li>
+                    <li>{{ partial "decoding-step.html" . }}</li>
                 {{ end }}
             </ol>
         </div>

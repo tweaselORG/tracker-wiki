@@ -11,5 +11,36 @@
     "tracker-list-datenanfragen-link": { "other": "Get company information on datarequests.org" },
     "tracker-list-datenanfragen-link-domain": { "other": "datarequests.org" },
     "tracker-list-exodus-link": { "other": "Go to tracker entry in the Exodus database." },
-    "tracker-list-tracker-adapters-heading": { "other": "Tracker adapters" }
+    "tracker-list-tracker-adapters-heading": { "other": "Tracker adapters" },
+
+    "decoding-step-function-parseQueryString": {
+        "one": "Parse `{{ .input }}` as a query string.",
+        "other": "Parse every element in `{{ .mapInput }}` as a query string."
+    },
+    "decoding-step-function-parseJson": {
+        "one": "Parse `{{ .input }}` as JSON.",
+        "other": "Parse every element in `{{ .mapInput }}` as JSON."
+    },
+    "decoding-step-function-decodeBase64": {
+        "one": "Decode `{{ .input }}` as a Base64 string.",
+        "other": "Decode every element in `{{ .mapInput }}` as a Base64 string."
+    },
+    "decoding-step-function-decodeUrl": {
+        "one": "Decode `{{ .input }}` as a URL-encoded (percent-encoded) string.",
+        "other": "Decode every element in `{{ .mapInput }}` as a URL-encoded (percent-encoded) string."
+    },
+    "decoding-step-function-decodeProtobuf": {
+        "one": "Decode `{{ .input }}` as a protocol buffer (Protobuf).",
+        "other": "Decode every element in `{{ .mapInput }}` as a protocol buffer (Protobuf)."
+    },
+    "decoding-step-function-ensureArray": {
+        "one": "Wrap `{{ .input }}` in an array if it isn’t one already.",
+        "other": "Wrap every element in `{{ .mapInput }}` in an array if it isn’t one already."
+    },
+    "decoding-step-function-getProperty": {
+        "one": "Get the property at JSONPath `{{ .options.path }}` in `{{ .input }}`.",
+        "other": "Get the property at JSONPath `{{ .options.path }}` for every element in `{{ .mapInput }}`."
+    },
+
+    "decoding-step-store": { "other": "Store that in `{{ .output }}`." }
 }
