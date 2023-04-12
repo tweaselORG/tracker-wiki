@@ -11,7 +11,8 @@
     },
     "params": {
         "BookSection": "/tracker",
-        "BookTheme": "auto"
+        "BookTheme": "auto",
+        "BookToC": false
     },
     "markup": {
         "highlight": {

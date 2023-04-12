@@ -54,33 +54,35 @@
                 <th>{{ T "tracker-single-transmitted-data-table-head-context" }}</th>
                 <th>{{ T "tracker-single-transmitted-data-table-head-path" }}</th>
                 <th>{{ T "tracker-single-transmitted-data-table-head-reasoning" }}</th>
+                <th>{{ T "tracker-single-transmitted-data-table-head-examples" }}</th>
             </tr>
         </thead>
         {{ range $property, $path := . }}
-        <!-- There is no type checking function in go template, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9  -->
-        {{ if eq (printf "%T" $path) "[]interface {}" }} {{ $length := len $path }}
-        <tbody>
-            {{ range $index, $element := $path }}
-            <tr>
-                {{ if eq $index 0 }}
-                <td rowspan="{{ $length }}">{{ $property }}</td>
+            <!-- There is no type checking function in Go templates, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9 -->
+            {{ $pathArray := cond (eq (printf "%T" $path) "[]interface {}") $path (slice $path) }}
+            {{ $length := len $pathArray }}
+            <tbody>
+                {{ range $index, $element := $pathArray }}
+                    <tr>
+                        {{ if eq $index 0 }}
+                        <td{{ if gt $length 1 }} rowspan="{{ $length }}"{{ end }}>{{ $property }}</td>
+                        {{ end }}
+                        <td>{{ .context }}</td>
+                        <td><code>{{ .path }}</code></td>
+                        <td>{{ .reasoning }}</td>
+                        <td>
+                            {{ $examples := index $.Site.Data.adapterExamples (printf "%s/%s/%s/%s/%s" $.Params.tracker.slug $.Params.slug $property .context .path) }}
+                            {{ if $examples }}
+                                {{ $examplesArray := cond (eq (printf "%T" $examples) "[]interface {}") $examples (slice $examples) }}
+                                {{ range $examplesArray | first 5 }}
+                                    <code>{{ . }}</code><br>
+                                {{ end }}
+                            {{ end }}
+                        </td>
+                    </tr>
                 {{ end }}
-                <td>{{ .context }}</td>
-                <td><code>{{ .path }}</code></td>
-                <td>{{ .reasoning }}</td>
-            </tr>
-            {{ end }}
-        </tbody>
-        {{ else }}
-        <tbody>
-            <tr>
-                <td>{{ $property }}</td>
-                <td>{{ .context }}</td>
-                <td><code>{{ .path }}</code></td>
-                <td>{{ .reasoning }}</td>
-            </tr>
-        </tbody>
-        {{ end }} {{ end }}
+            </tbody>
+        {{ end }}
     </table>
     {{ end }}
 </article>
