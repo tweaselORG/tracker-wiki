@@ -7,8 +7,10 @@
     "tracker-single-transmitted-data-table-head-property": { "other": "Property" },
     "tracker-single-transmitted-data-table-head-context": { "other": "Context" },
     "tracker-single-transmitted-data-table-head-path": { "other": "Path" },
-    "tracker-single-transmitted-data-table-head-reasoning": { "other": "Reasoning" },
     "tracker-single-transmitted-data-table-head-examples": { "other": "Examples of observed values" },
+    "tracker-single-transmitted-data-table-reasoning-link-desc": {
+        "other": "More details on how we identified this property"
+    },
     "tracker-list-datenanfragen-link": { "other": "Get company information on datarequests.org" },
     "tracker-list-datenanfragen-link-domain": { "other": "datarequests.org" },
     "tracker-list-exodus-link": { "other": "Go to tracker entry in the Exodus database." },

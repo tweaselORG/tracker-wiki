@@ -53,7 +53,6 @@
                 <th>{{ T "tracker-single-transmitted-data-table-head-property" }}</th>
                 <th>{{ T "tracker-single-transmitted-data-table-head-context" }}</th>
                 <th>{{ T "tracker-single-transmitted-data-table-head-path" }}</th>
-                <th>{{ T "tracker-single-transmitted-data-table-head-reasoning" }}</th>
                 <th>{{ T "tracker-single-transmitted-data-table-head-examples" }}</th>
             </tr>
         </thead>
@@ -65,11 +64,15 @@
                 {{ range $index, $element := $pathArray }}
                     <tr>
                         {{ if eq $index 0 }}
-                        <td{{ if gt $length 1 }} rowspan="{{ $length }}"{{ end }}>{{ $property }}</td>
+                            <td{{ if gt $length 1 }} rowspan="{{ $length }}"{{ end }}>{{ $property }}</td>
                         {{ end }}
                         <td>{{ .context }}</td>
-                        <td><code>{{ .path }}</code></td>
-                        <td>{{ .reasoning }}</td>
+                        <td>
+                            <code>{{ .path }}</code>
+                            {{ if or (strings.HasPrefix .reasoning "https://") (strings.HasPrefix .reasoning "http://") }}
+                                <a href="{{ .reasoning }}"><img src="/svg/information.svg" class="inline-icon icon-information" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}"></a>
+                            {{ end }}
+                        </td>
                         <td>
                             {{ $examples := index $.Site.Data.adapterExamples (printf "%s/%s/%s/%s/%s" $.Params.tracker.slug $.Params.slug $property .context .path) }}
                             {{ if $examples }}

@@ -17,3 +17,12 @@ table.data-table {
         padding: $padding-8;
     }
 }
+
+.inline-icon {
+    width: 1em;
+    height: 1em;
+
+    &.icon-information {
+        vertical-align: -2px;
+    }
+}

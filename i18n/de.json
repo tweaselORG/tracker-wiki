@@ -7,8 +7,10 @@
     "tracker-single-transmitted-data-table-head-property": { "other": "Datentyp" },
     "tracker-single-transmitted-data-table-head-context": { "other": "Kontext" },
     "tracker-single-transmitted-data-table-head-path": { "other": "Pfad" },
-    "tracker-single-transmitted-data-table-head-reasoning": { "other": "Begründung" },
     "tracker-single-transmitted-data-table-head-examples": { "other": "Beispiele beobachteter Werte" },
+    "tracker-single-transmitted-data-table-reasoning-link-desc": {
+        "other": "Weitere Details dazu, wie wir dieses Datum zugeordnet haben"
+    },
     "tracker-list-datenanfragen-link": { "other": "Unternehmensinformation auf Datenanfragen.de erhalten." },
     "tracker-list-datenanfragen-link-domain": { "other": "datenanfragen.de" },
     "tracker-list-exodus-link": { "other": "Den Eintrag für den Tracker in der Exodus-Datenbank ansehen." },
