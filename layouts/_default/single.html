@@ -56,11 +56,11 @@
                 <th>{{ T "tracker-single-transmitted-data-table-head-examples" }}</th>
             </tr>
         </thead>
-        {{ range $property, $path := . }}
-            <!-- There is no type checking function in Go templates, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9 -->
-            {{ $pathArray := cond (eq (printf "%T" $path) "[]interface {}") $path (slice $path) }}
-            {{ $length := len $pathArray }}
-            <tbody>
+        <tbody>
+            {{ range $property, $path := . }}
+                <!-- There is no type checking function in Go templates, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9 -->
+                {{ $pathArray := cond (eq (printf "%T" $path) "[]interface {}") $path (slice $path) }}
+                {{ $length := len $pathArray }}
                 {{ range $index, $element := $pathArray }}
                     <tr>
                         {{ if eq $index 0 }}
@@ -84,8 +84,8 @@
                         </td>
                     </tr>
                 {{ end }}
-            </tbody>
-        {{ end }}
+            {{ end }}
+        </tbody>
     </table>
     {{ end }}
 </article>

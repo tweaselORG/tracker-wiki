@@ -5,7 +5,7 @@ table.data-table {
     overflow-y: scroll;
 
     tbody {
-        &:nth-child(even) {
+        &tr:nth-child(even) {
             background-color: var(--gray-100);
         }
     }
