@@ -3809,8 +3809,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-trackhar@../TrackHAR:
-  version "0.0.0"
+trackhar@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/trackhar/-/trackhar-0.1.1.tgz#1397d3a97c7a7a5adcdc4b24438e21e98fcf6986"
+  integrity sha512-GEx9kAofrXQAGJqHGX28tB4COPtyz8jLD6Yo2cPUiHKdWJTAYddhauZ+1aZhk1d785V62UukEb5x3DjwkJenjw==
   dependencies:
     "@types/har-format" "^1.2.10"
     cross-dirname "^0.1.0"

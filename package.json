@@ -43,7 +43,7 @@
     "prettier": "@baltpeter/prettier-config",
     "dependencies": {
         "cross-dirname": "^0.1.0",
-        "trackhar": "../TrackHAR"
+        "trackhar": "^0.1.1"
     },
     "devDependencies": {
         "@baltpeter/eslint-config": "2.1.2",
