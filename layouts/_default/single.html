@@ -47,46 +47,48 @@
 
     {{ with .Params.containedDataPaths }}
     <h2>{{ T "tracker-single-transmitted-data-heading" }}</h2>
-    <table class="data-table">
-        <thead>
-            <tr>
-                <th>{{ T "tracker-single-transmitted-data-table-head-property" }}</th>
-                <th>{{ T "tracker-single-transmitted-data-table-head-context" }}</th>
-                <th>{{ T "tracker-single-transmitted-data-table-head-path" }}</th>
-                <th>{{ T "tracker-single-transmitted-data-table-head-examples" }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{ range $property, $path := . }}
-                <!-- There is no type checking function in Go templates, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9 -->
-                {{ $pathArray := cond (eq (printf "%T" $path) "[]interface {}") $path (slice $path) }}
-                {{ $length := len $pathArray }}
-                {{ range $index, $element := $pathArray }}
-                    <tr>
-                        {{ if eq $index 0 }}
-                            <td{{ if gt $length 1 }} rowspan="{{ $length }}"{{ end }}>{{ T (printf "data-path-property-%s" $property) }}</td>
-                        {{ end }}
-                        <td>{{ .context }}</td>
-                        <td>
-                            <code>{{ .path }}</code>
-                            {{ if or (strings.HasPrefix .reasoning "https://") (strings.HasPrefix .reasoning "http://") }}
-                                <a href="{{ .reasoning }}"><img src="/svg/information.svg" class="inline-icon icon-information" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}"></a>
+    <div class="data-table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>{{ T "tracker-single-transmitted-data-table-head-property" }}</th>
+                    <th>{{ T "tracker-single-transmitted-data-table-head-context" }}</th>
+                    <th>{{ T "tracker-single-transmitted-data-table-head-path" }}</th>
+                    <th>{{ T "tracker-single-transmitted-data-table-head-examples" }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range $property, $path := . }}
+                    <!-- There is no type checking function in Go templates, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9 -->
+                    {{ $pathArray := cond (eq (printf "%T" $path) "[]interface {}") $path (slice $path) }}
+                    {{ $length := len $pathArray }}
+                    {{ range $index, $element := $pathArray }}
+                        <tr>
+                            {{ if eq $index 0 }}
+                                <td{{ if gt $length 1 }} rowspan="{{ $length }}"{{ end }}>{{ T (printf "data-path-property-%s" $property) }}</td>
                             {{ end }}
-                        </td>
-                        <td>
-                            {{ $examples := index $.Site.Data.adapterExamples (printf "%s/%s/%s/%s/%s" $.Params.tracker.slug $.Params.slug $property .context .path) }}
-                            {{ if $examples }}
-                                {{ $examplesArray := cond (eq (printf "%T" $examples) "[]interface {}") $examples (slice $examples) }}
-                                {{ range $examplesArray | first 5 }}
-                                    <code>{{ . }}</code><br>
+                            <td>{{ .context }}</td>
+                            <td>
+                                <code>{{ .path }}</code>
+                                {{ if or (strings.HasPrefix .reasoning "https://") (strings.HasPrefix .reasoning "http://") }}
+                                    <a href="{{ .reasoning }}"><img src="/svg/information.svg" class="inline-icon icon-information" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}"></a>
                                 {{ end }}
-                            {{ end }}
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                {{ $examples := index $.Site.Data.adapterExamples (printf "%s/%s/%s/%s/%s" $.Params.tracker.slug $.Params.slug $property .context .path) }}
+                                {{ if $examples }}
+                                    {{ $examplesArray := cond (eq (printf "%T" $examples) "[]interface {}") $examples (slice $examples) }}
+                                    {{ range $examplesArray | first 5 }}
+                                        <code>{{ . }}</code><br>
+                                    {{ end }}
+                                {{ end }}
+                            </td>
+                        </tr>
+                    {{ end }}
                 {{ end }}
-            {{ end }}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
     {{ end }}
 </article>
 {{ end }}
