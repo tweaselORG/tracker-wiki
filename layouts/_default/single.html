@@ -8,7 +8,7 @@
             {{ $detailsLinks = $detailsLinks | append (printf "<a href='https://%s/company/%s'>%s</a>" (T "tracker-list-datenanfragen-link-domain") . (T "tracker-list-datenanfragen-link")) }}
         {{ end }}
         {{ with .exodusId }}
-            {{ $detailsLinks = $detailsLinks | append (printf "<a href='https://reports.exodus-privacy.eu.org/%s/trackers/%s'>%s</a>" $.Language . (T "tracker-list-exodus-link")) }}
+            {{ $detailsLinks = $detailsLinks | append (printf "<a href='https://reports.exodus-privacy.eu.org/%s/trackers/%.0f'>%s</a>" $.Language . (T "tracker-list-exodus-link")) }}
         {{ end }}
 
         {{ T "tracker-single-operated-by" }} <a href="{{ (print "t/" .slug) | absURL }}">{{ .name }}</a>
