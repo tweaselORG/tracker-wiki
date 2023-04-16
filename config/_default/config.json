@@ -10,7 +10,7 @@
         ]
     },
     "params": {
-        "BookSection": "/tracker",
+        "BookSection": "/t",
         "BookTheme": "auto",
         "BookToC": false
     },

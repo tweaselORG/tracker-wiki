@@ -24,13 +24,14 @@ import { adapters } from 'trackhar';
     );
 
     for (const language of languages) {
-        await rm(join(getDirname(), '../content', language, 'tracker'), { recursive: true, force: true });
+        const trackerContentDir = join(getDirname(), '../content', language, 't');
+        await rm(trackerContentDir, { recursive: true, force: true });
         await Promise.all(
             Object.values(trackers).map(async (tracker) => {
                 // { recursive: true } behaves like mkdir -p
-                await mkdir(join(getDirname(), '../content', language, 'tracker', tracker.slug), { recursive: true });
+                await mkdir(join(trackerContentDir, tracker.slug), { recursive: true });
                 await writeFile(
-                    join(getDirname(), '../content', language, 'tracker', tracker.slug, '_index.md'),
+                    join(trackerContentDir, tracker.slug, '_index.md'),
                     JSON.stringify(tracker, null, 4) + '\n&nbsp;',
                     'utf8'
                 );
@@ -48,14 +49,7 @@ import { adapters } from 'trackhar';
                     })
                     .map((adapter) =>
                         writeFile(
-                            join(
-                                getDirname(),
-                                '../content',
-                                language,
-                                'tracker',
-                                adapter.tracker.slug,
-                                `${adapter.slug}.json.md`
-                            ),
+                            join(trackerContentDir, adapter.tracker.slug, `${adapter.slug}.json.md`),
                             JSON.stringify(
                                 adapter,
                                 (_, value) => (value instanceof RegExp ? value.toString() : value),
