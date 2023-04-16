@@ -114,5 +114,8 @@
     "data-path-property-uptime": { "other": "Uptime" },
     "data-path-property-useragent": { "other": "User agent" },
     "data-path-property-viewedpage": { "other": "Viewed page" },
-    "data-path-property-volume": { "other": "Volume" }
+    "data-path-property-volume": { "other": "Volume" },
+
+    "footer-legal": "Legal notice & contact",
+    "footer-privacy-policy": "Privacy policy"
 }

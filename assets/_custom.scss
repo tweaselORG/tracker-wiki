@@ -32,3 +32,26 @@ table.data-table {
         vertical-align: -2px;
     }
 }
+
+/* Make the body the size of the viewport or the page to position the footer */
+body {
+    height: 100%;
+    position: relative;
+    min-height: 100vh;
+}
+
+footer.site-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    .container {
+        padding-left: $menu-width;
+        column-gap: $padding-16;
+        padding-bottom: $padding-16;
+
+        @media screen and (max-width: $mobile-breakpoint) {
+            padding-left: 0;
+        }
+    }
+}

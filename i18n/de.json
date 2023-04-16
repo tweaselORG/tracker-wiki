@@ -14,5 +14,8 @@
     "tracker-list-datenanfragen-link": { "other": "Unternehmensinformation auf Datenanfragen.de erhalten." },
     "tracker-list-datenanfragen-link-domain": { "other": "datenanfragen.de" },
     "tracker-list-exodus-link": { "other": "Den Eintrag für den Tracker in der Exodus-Datenbank ansehen." },
-    "tracker-list-tracker-adapters-heading": { "other": "Tracker Adapter" }
+    "tracker-list-tracker-adapters-heading": { "other": "Tracker Adapter" },
+
+    "footer-legal": "Impressum",
+    "footer-privacy-policy": "Datenschutzerklärung"
 }
