@@ -16,7 +16,7 @@
   ]
 }
 
-This wiki documents the tracker adapters used by [TrackHAR](https://github.com/tweaselORG/TrackHAR) to extract transmitted data from tracking requests in mobile apps. The adapter pages are automatically generated from the TrackHAR code and grouped by their tracking company. The wiki is maintained by [Datenanfragen.de e.&thinsp;V.](https://www.datarequests.org/verein) and all information is published under MIT License.
+This wiki documents the tracker adapters used by [TrackHAR](https://github.com/tweaselORG/TrackHAR) to extract transmitted data from tracking requests in mobile apps. The adapter pages are automatically generated from the TrackHAR code and grouped by their tracking company. The wiki is maintained by [Datenanfragen.de e.&thinsp;V.](https://www.datarequests.org/verein) and all information is published under a Creative Commons CC0 1.0 Universal license.
 
 ## What is adapter-based matching?
 
