@@ -1,11 +1,11 @@
 {
     "tracker-single-endpoints-heading": { "other": "Endpoint URLs" },
     "tracker-single-endpoints-explanation": {
-        "other": "These are URLs or Regexes of URLs the tracker sends the data to. We use these to determine which adapter to apply to a request. Some trackers use the same endpoint for several formats. In this case we use additional logic to match the adapter to the request, refer to the code for more information."
+        "other": "These are URLs or regexes of endpoints the tracker sends data to. We use these to determine which adapter to apply to a request. Some trackers use the same endpoint for several formats. In this case we use additional logic to match the adapter to the request, refer to the code for more information."
     },
     "tracker-single-decoding-steps-heading": { "other": "Decoding steps" },
     "tracker-single-decoding-steps-explanation": {
-        "other": "Every tracking library has its own way of transmitting tracking data, often even several. They are regularly pretty convoluted, nested encoding scemes. Because of that, the adapter needs to decode the request information into a consistent format. We try to keep keys and paths intact, but the structure results from our decoding. All steps used in the decoding for this adapter are documented here."
+        "other": "Every tracking library has its own way of transmitting tracking data, often even several. They are regularly pretty convoluted, nested encoding schemes. Because of that, the adapter needs to decode the request information into a consistent format. We try to keep keys and paths intact, but the structure results from our decoding. All steps used in the decoding for this adapter are documented here."
     },
     "tracker-single-decoding-steps-description": {
         "other": "Description"
@@ -24,7 +24,7 @@
     },
     "tracker-single-tracker-heading": { "other": "Tracker information" },
     "tracker-single-tracker-name": { "other": "Tracking company" },
-    "tracker-single-tracker-dade-link": { "other": "Datarequest.org entry" },
+    "tracker-single-tracker-dade-link": { "other": "datarequests.org entry" },
     "tracker-single-tracker-exodus-link": { "other": "Exodus entry" },
 
     "tracker-list-datenanfragen-link": { "other": "Get company information on datarequests.org" },
@@ -32,7 +32,7 @@
     "tracker-list-exodus-link": { "other": "Go to tracker entry in the Exodus database." },
     "tracker-list-tracker-adapters-heading": { "other": "Tracker adapters" },
     "tracker-list-tracker-adapters-explanation": {
-        "other": "Each tracking company often has serveral endpoints and data formats for the transmitted data. For each combination of endpoints and data formats, we created a distinct adapter which decodes the request and maps it to the data types. For this tracking company, we have the following adapters:"
+        "other": "Tracking companies often use serveral endpoints and data formats for the transmitted data. For each combination of endpoints and data formats, we create a distinct adapter which decodes the request and maps it to the data types. For this tracking company, we have the following adapters:"
     },
 
     "decoding-step-function-parseQueryString": {

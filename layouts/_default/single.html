@@ -13,7 +13,7 @@
 
     {{ with .Params.endpointUrls}}
     <h2>{{ T "tracker-single-endpoints-heading" }}</h2>
-    <blockquote class="book-hint info">{{ T "tracker-single-endpoints-explanation" | markdownify }}</blockquote>
+    {{ T "tracker-single-endpoints-explanation" | markdownify }}
     <ul>
         {{ range .}}
             <li><code>{{ . }}</code></li>
@@ -23,7 +23,7 @@
 
     {{ with .Params.decodingSteps}}
     <h2>{{ T "tracker-single-decoding-steps-heading" }}</h2>
-    <blockquote class="book-hint info">{{ T "tracker-single-decoding-steps-explanation" | markdownify }}</blockquote>
+    {{ T "tracker-single-decoding-steps-explanation" | markdownify }}
     <div class="book-tabs">
         <input type="radio" class="toggle" name="tabs-decoding-steps" id="tabs-decoding-steps-description" checked="checked" />
         <label for="tabs-decoding-steps-description">
@@ -58,7 +58,7 @@
 
     {{ with .Params.containedDataPaths }}
     <h2>{{ T "tracker-single-transmitted-data-heading" }}</h2>
-    <blockquote class="book-hint info">{{ T "tracker-single-transmitted-data-explanation" | markdownify }}</blockquote>
+    {{ T "tracker-single-transmitted-data-explanation" | markdownify }}
     <div class="data-table-container">
         <table class="data-table">
             <thead>
