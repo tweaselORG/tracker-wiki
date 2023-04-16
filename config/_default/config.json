@@ -20,5 +20,6 @@
             "lineNos": true,
             "lineNumbersInTable": false
         }
-    }
+    },
+    "disableLanguages": ["de"]
 }
