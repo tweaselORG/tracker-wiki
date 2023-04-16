@@ -3,7 +3,7 @@
     "tracker-single-decoding-steps-heading": { "other": "Umwandlungsschritte" },
     "tracker-single-decoding-steps-description": { "other": "Beschreibung" },
     "tracker-single-decoding-steps-pseudo-code": { "other": "Pseudocode" },
-    "tracker-single-transmitted-data-heading": { "other": "Möglicherweise übertragene Daten" },
+    "tracker-single-transmitted-data-heading": { "other": "Beobachtete Datenübertragungen" },
     "tracker-single-transmitted-data-table-head-property": { "other": "Datentyp" },
     "tracker-single-transmitted-data-table-head-context": { "other": "Kontext" },
     "tracker-single-transmitted-data-table-head-path": { "other": "Pfad" },
