@@ -22,14 +22,11 @@
     "tracker-single-transmitted-data-table-reasoning-link-desc": {
         "other": "More details on how we identified this property"
     },
-    "tracker-single-tracker-heading": { "other": "Tracker information" },
-    "tracker-single-tracker-name": { "other": "Tracking company" },
-    "tracker-single-tracker-dade-link": { "other": "datarequests.org entry" },
-    "tracker-single-tracker-exodus-link": { "other": "Exodus entry" },
+    "tracker-single-operated-by": { "other": "operated by:" },
 
-    "tracker-list-datenanfragen-link": { "other": "Get company information on datarequests.org" },
+    "tracker-list-datenanfragen-link": { "other": "get company information on datarequests.org" },
     "tracker-list-datenanfragen-link-domain": { "other": "datarequests.org" },
-    "tracker-list-exodus-link": { "other": "Go to tracker entry in the Exodus database." },
+    "tracker-list-exodus-link": { "other": "go to tracker entry in the Exodus database" },
     "tracker-list-tracker-adapters-heading": { "other": "Tracker adapters" },
     "tracker-list-tracker-adapters-explanation": {
         "other": "Tracking companies often use serveral endpoints and data formats for the transmitted data. For each combination of endpoints and data formats, we create a distinct adapter which decodes the request and maps it to the data types. For this tracking company, we have the following adapters:"
