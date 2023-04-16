@@ -1,0 +1,57 @@
+.data-table-container {
+    overflow-x: auto;
+}
+
+table.data-table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+    display: table;
+    table-layout: auto;
+
+    tbody {
+        &tr:nth-child(even) {
+            background-color: var(--gray-100);
+        }
+    }
+
+    td,
+    th {
+        border: $padding-1 solid var(--gray-200);
+        text-align: left;
+        padding: $padding-8;
+    }
+}
+
+.inline-icon {
+    width: 1em;
+    height: 1em;
+
+    &.icon-information {
+        vertical-align: -2px;
+    }
+}
+
+/* Make the body the size of the viewport or the page to position the footer */
+body {
+    height: 100%;
+    position: relative;
+    min-height: 100vh;
+}
+
+footer.site-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    .container {
+        padding-left: $menu-width + $padding-16;
+        padding-bottom: $padding-16;
+        padding-right: $padding-16;
+
+        @media screen and (max-width: $mobile-breakpoint) {
+            padding-left: 0;
+        }
+    }
+}

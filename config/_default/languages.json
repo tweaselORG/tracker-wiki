@@ -1,0 +1,12 @@
+{
+    "en": {
+        "title": "Tweasel Tracker Wiki",
+        "contentDir": "content/en",
+        "languageName": "English"
+    },
+    "de": {
+        "title": "Tweasel Tracker Wiki",
+        "contentDir": "content/de",
+        "languageName": "Deutsch"
+    }
+}

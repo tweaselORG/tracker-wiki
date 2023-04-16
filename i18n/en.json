@@ -1,0 +1,139 @@
+{
+    "tracker-single-endpoints-heading": { "other": "Endpoint URLs" },
+    "tracker-single-endpoints-explanation": {
+        "other": "These are URLs or regexes of endpoints the tracker sends data to. We use these to determine which adapter to apply to a request. Some trackers use the same endpoint for several formats. In this case we use additional logic to match the adapter to the request, refer to the code for more information."
+    },
+    "tracker-single-decoding-steps-heading": { "other": "Decoding steps" },
+    "tracker-single-decoding-steps-explanation": {
+        "other": "Every tracking library has its own way of transmitting tracking data, often even several. They are regularly pretty convoluted, nested encoding schemes. Because of that, the adapter needs to decode the request information into a consistent format. We try to keep keys and paths intact, but the structure results from our decoding. All steps used in the decoding for this adapter are documented here."
+    },
+    "tracker-single-decoding-steps-description": {
+        "other": "Description"
+    },
+    "tracker-single-decoding-steps-pseudo-code": { "other": "Pseudo code" },
+    "tracker-single-transmitted-data-heading": { "other": "Observed data transmissions" },
+    "tracker-single-transmitted-data-explanation": {
+        "other": "This is data that we observed being transmitted by this tracker. *Not every request contains all of this data.* The context of the data describes where we found the data in the request, the path describes the location of the data in the decoded request. The examples are a selection of observed values."
+    },
+    "tracker-single-transmitted-data-table-head-property": { "other": "Property" },
+    "tracker-single-transmitted-data-table-head-context": { "other": "Context" },
+    "tracker-single-transmitted-data-table-head-path": { "other": "Path" },
+    "tracker-single-transmitted-data-table-head-examples": { "other": "Examples of observed values" },
+    "tracker-single-transmitted-data-table-reasoning-link-desc": {
+        "other": "More details on how we identified this property"
+    },
+    "tracker-single-operated-by": { "other": "operated by:" },
+
+    "tracker-list-datenanfragen-link": { "other": "get company information on datarequests.org" },
+    "tracker-list-datenanfragen-link-domain": { "other": "datarequests.org" },
+    "tracker-list-exodus-link": { "other": "go to tracker entry in the Exodus database" },
+    "tracker-list-tracker-adapters-heading": { "other": "Tracker adapters" },
+    "tracker-list-tracker-adapters-explanation": {
+        "other": "Tracking companies often use serveral endpoints and data formats for the transmitted data. For each combination of endpoints and data formats, we create a distinct adapter which decodes the request and maps it to the data types. For this tracking company, we have the following adapters:"
+    },
+
+    "decoding-step-function-parseQueryString": {
+        "one": "Parse {{ .input }} as a query string.",
+        "other": "Parse every element in {{ .mapInput }} as a query string."
+    },
+    "decoding-step-function-parseJson": {
+        "one": "Parse {{ .input }} as JSON.",
+        "other": "Parse every element in {{ .mapInput }} as JSON."
+    },
+    "decoding-step-function-decodeBase64": {
+        "one": "Decode {{ .input }} as a Base64 string.",
+        "other": "Decode every element in {{ .mapInput }} as a Base64 string."
+    },
+    "decoding-step-function-decodeUrl": {
+        "one": "Decode {{ .input }} as a URL-encoded (percent-encoded) string.",
+        "other": "Decode every element in {{ .mapInput }} as a URL-encoded (percent-encoded) string."
+    },
+    "decoding-step-function-decodeProtobuf": {
+        "one": "Decode {{ .input }} as a protocol buffer (Protobuf).",
+        "other": "Decode every element in {{ .mapInput }} as a protocol buffer (Protobuf)."
+    },
+    "decoding-step-function-ensureArray": {
+        "one": "Wrap {{ .input }} in an array if it isn’t one already.",
+        "other": "Wrap every element in {{ .mapInput }} in an array if it isn’t one already."
+    },
+    "decoding-step-function-getProperty": {
+        "one": "Get the property at JSONPath `{{ .options.path }}` in {{ .input }}.",
+        "other": "Get the property at JSONPath `{{ .options.path }}` for every element in {{ .mapInput }}."
+    },
+
+    "decoding-step-store": { "other": "Store that in {{ .output }}." },
+    "decoding-step-replace": { "other": "Replace the existing value." },
+
+    "decoding-step-identifier-prefix-body": { "other": "the request body" },
+    "decoding-step-identifier-prefix-query": { "other": "the query string in the request path" },
+    "decoding-step-identifier-prefix-header": { "other": "the request headers" },
+    "decoding-step-identifier-prefix-path": { "other": "the request path" },
+    "decoding-step-identifier-prefix-res.body": { "other": "the result for the request body" },
+    "decoding-step-identifier-prefix-res.query": { "other": "the result for the query string" },
+    "decoding-step-identifier-prefix-res.header": { "other": "the result for the request headers" },
+    "decoding-step-identifier-prefix-res.path": { "other": "the result for the request path" },
+    "decoding-step-identifier-prefix-variable": { "other": "the variable `{{ . }}`" },
+
+    "decoding-step-identifier-jsonpath": {
+        "other": "the property at JSONPath `{{ .path }}` in {{ .prefixDescription }}"
+    },
+    "decoding-step-identifier-path": { "other": "{{ .prefixDescription }} at `{{ .path }}`" },
+
+    "data-path-property-accelerometerx": { "other": "Accelerometer X" },
+    "data-path-property-accelerometery": { "other": "Accelerometer Y" },
+    "data-path-property-accelerometerz": { "other": "Accelerometer Z" },
+    "data-path-property-appid": { "other": "App ID" },
+    "data-path-property-appname": { "other": "App name" },
+    "data-path-property-appversion": { "other": "App version" },
+    "data-path-property-architecture": { "other": "Architecture" },
+    "data-path-property-batterylevel": { "other": "Battery level" },
+    "data-path-property-carrier": { "other": "Carrier" },
+    "data-path-property-country": { "other": "Country" },
+    "data-path-property-devicename": { "other": "Device name" },
+    "data-path-property-diskfree": { "other": "Free disk space" },
+    "data-path-property-disktotal": { "other": "Total disk space" },
+    "data-path-property-diskused": { "other": "Used disk space" },
+    "data-path-property-hashedidfa": { "other": "Hashed device advertising ID" },
+    "data-path-property-idfa": { "other": "Device advertising ID" },
+    "data-path-property-idfv": { "other": "iOS IDFV" },
+    "data-path-property-ischarging": { "other": "Charging status" },
+    "data-path-property-isemulator": { "other": "Is device an emulator?" },
+    "data-path-property-isindarkmode": { "other": "Is app in dark mode?" },
+    "data-path-property-isinforeground": { "other": "Is app in foreground?" },
+    "data-path-property-isroaming": { "other": "Is device roaming?" },
+    "data-path-property-isrooted": { "other": "Is device rooted?" },
+    "data-path-property-language": { "other": "Language" },
+    "data-path-property-latitude": { "other": "Latitude" },
+    "data-path-property-localip": { "other": "Local IP address(es)" },
+    "data-path-property-longitude": { "other": "Longitude" },
+    "data-path-property-macaddress": { "other": "MAC address" },
+    "data-path-property-manufacturer": { "other": "Manufacturer" },
+    "data-path-property-model": { "other": "Model" },
+    "data-path-property-networkconnectiontype": { "other": "Network connection type" },
+    "data-path-property-orientation": { "other": "Orientation" },
+    "data-path-property-osname": { "other": "OS name" },
+    "data-path-property-osversion": { "other": "OS version" },
+    "data-path-property-otheridentifiers": { "other": "Other identifiers" },
+    "data-path-property-publicip": { "other": "Public IP address" },
+    "data-path-property-ramfree": { "other": "Free RAM" },
+    "data-path-property-ramtotal": { "other": "Total RAM" },
+    "data-path-property-ramused": { "other": "Used RAM" },
+    "data-path-property-rotationx": { "other": "Rotation X" },
+    "data-path-property-rotationy": { "other": "Rotation Y" },
+    "data-path-property-rotationz": { "other": "Rotation Z" },
+    "data-path-property-screenheight": { "other": "Screen height" },
+    "data-path-property-screenwidth": { "other": "Screen width" },
+    "data-path-property-signalstrengthcellular": { "other": "Signal strength (cellular)" },
+    "data-path-property-signalstrengthwifi": { "other": "Signal strength (Wi-Fi)" },
+    "data-path-property-timezone": { "other": "Time zone" },
+    "data-path-property-trackersdkversion": { "other": "Tracker SDK version" },
+    "data-path-property-uptime": { "other": "Uptime" },
+    "data-path-property-useragent": { "other": "User agent" },
+    "data-path-property-viewedpage": { "other": "Viewed page" },
+    "data-path-property-volume": { "other": "Volume" },
+
+    "footer-legal": "Legal notice & contact",
+    "footer-privacy-policy": "Privacy policy",
+    "footer-cc0-text": "This wiki and all content therein is licensed under a CC0 1.0 Universal license.",
+    "footer-cc0-link": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+}

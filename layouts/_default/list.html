@@ -1,0 +1,24 @@
+{{ define "main" }}
+<article class="markdown">
+    <h1>{{ .Title }}</h1>
+
+    {{ if .IsHome }}
+    {{ .Content }}
+    {{ else }}
+        <ul>
+            {{ with .Params.datenanfragenSlug }}<li><a href="https://{{ T "tracker-list-datenanfragen-link-domain" }}/company/{{ . }}">{{ T "tracker-list-datenanfragen-link" }}</a></li>{{ end }}
+             {{ with .Params.exodusId }}<li><a href="https://reports.exodus-privacy.eu.org/{{ $.Language }}/trackers/{{ . }}">{{ T "tracker-list-exodus-link" }}</a></li>{{ end }}
+        </ul>
+
+        {{ with .Params.adapters}}
+            <h2>{{ T "tracker-list-tracker-adapters-heading" }}</h2>
+            <p>{{ T "tracker-list-tracker-adapters-explanation" }}</p>
+            <ul>
+                {{ range .}}
+                    <li><a href="{{ (print "t/" $.Params.slug "/" . ) | absURL }}">{{ . }}</a></li>
+                {{ end }}
+            </ul>
+        {{ end }}
+    {{ end }}
+</article>
+{{ end }}

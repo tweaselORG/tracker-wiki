@@ -1,0 +1,19 @@
+{{ $input := (partial "decoding-step-identifier" .input) }}
+{{ $mapInput := (partial "decoding-step-identifier" .mapInput) }}
+{{ $output := (partial "decoding-step-identifier" .output) }}
+
+{{ $function := (
+    T (printf "decoding-step-function-%s" .function)
+        (dict
+            "Count" (cond (isset . "input") 1 2)
+            "input" $input
+            "mapInput" $mapInput
+            "options" .options
+        )
+    ) | markdownify }}
+{{ $store := cond (eq .input .output)
+    (T "decoding-step-replace")
+    (T "decoding-step-store" (dict "output" $output) | markdownify)
+}}
+
+{{ $function }} {{ $store }}

@@ -1,0 +1,112 @@
+{{ define "main" }}
+<article class="markdown">
+    <h1>{{ .Title }}</h1>
+
+    {{ with .Params.tracker }}
+        {{ $detailsLinks := (slice) }}
+        {{ with .datenanfragenSlug }}
+            {{ $detailsLinks = $detailsLinks | append (printf "<a href='https://%s/company/%s'>%s</a>" (T "tracker-list-datenanfragen-link-domain") . (T "tracker-list-datenanfragen-link")) }}
+        {{ end }}
+        {{ with .exodusId }}
+            {{ $detailsLinks = $detailsLinks | append (printf "<a href='https://reports.exodus-privacy.eu.org/%s/trackers/%s'>%s</a>" $.Language . (T "tracker-list-exodus-link")) }}
+        {{ end }}
+
+        {{ T "tracker-single-operated-by" }} <a href="{{ (print "t/" .slug) | absURL }}">{{ .name }}</a>
+        {{ if gt (len $detailsLinks) 0 }}
+            ({{ delimit $detailsLinks ", " }})
+        {{ end }}
+    {{ end }}
+
+    {{ with .Params.endpointUrls }}
+        <h2>{{ T "tracker-single-endpoints-heading" }}</h2>
+        {{ T "tracker-single-endpoints-explanation" | markdownify }}
+        <ul>
+            {{ range .}}
+                <li><code>{{ . }}</code></li>
+            {{ end }}
+        </ul>
+    {{ end }}
+
+    {{ with .Params.decodingSteps}}
+        <h2>{{ T "tracker-single-decoding-steps-heading" }}</h2>
+        {{ T "tracker-single-decoding-steps-explanation" | markdownify }}
+        <div class="book-tabs">
+            <input type="radio" class="toggle" name="tabs-decoding-steps" id="tabs-decoding-steps-description" checked="checked" />
+            <label for="tabs-decoding-steps-description">
+                {{ T "tracker-single-decoding-steps-description" }}
+            </label>
+            <div class="book-tabs-content markdown-inner">
+                <ol>
+                    {{ range . }}
+                        <li>{{ partial "decoding-step.html" . }}</li>
+                    {{ end }}
+                </ol>
+            </div>
+
+            <input type="radio" class="toggle" name="tabs-decoding-steps" id="tabs-decoding-steps-pseudo-code" />
+            <label for="tabs-decoding-steps-pseudo-code">
+                {{ T "tracker-single-decoding-steps-pseudo-code" }}
+            </label>
+            <div class="book-tabs-content markdown-inner">
+                {{ $code := "" }}
+                {{ range . }}
+                    {{ if isset . "input" }}
+                        {{ $code = printf "%s%s = %s(%s%s)\n" $code .output .function .input (cond (isset . "options") (printf ", %s" (.options | jsonify)) "") }}
+                    {{ else }}
+                        {{ $code = printf "%s%s = %s.map(%s%s)\n" $code .output .function .mapInput (cond (isset . "options") (printf ", %s" (.options | jsonify)) "") }}
+                    {{ end }}
+                {{ end }}
+
+                {{ highlight $code "actionscript3" }}
+            </div>
+        </div>
+    {{ end }}
+
+    {{ with .Params.containedDataPaths }}
+        <h2>{{ T "tracker-single-transmitted-data-heading" }}</h2>
+        {{ T "tracker-single-transmitted-data-explanation" | markdownify }}
+        <div class="data-table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>{{ T "tracker-single-transmitted-data-table-head-property" }}</th>
+                        <th>{{ T "tracker-single-transmitted-data-table-head-context" }}</th>
+                        <th>{{ T "tracker-single-transmitted-data-table-head-path" }}</th>
+                        <th>{{ T "tracker-single-transmitted-data-table-head-examples" }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range $property, $path := . }}
+                        <!-- There is no type checking function in Go templates, so this is what we have to resort to… I took this from: https://discourse.gohugo.io/t/how-to-check-if-a-variable-is-string-or-array/7460/9 -->
+                        {{ $pathArray := cond (eq (printf "%T" $path) "[]interface {}") $path (slice $path) }}
+                        {{ $length := len $pathArray }}
+                        {{ range $index, $element := $pathArray }}
+                            <tr>
+                                {{ if eq $index 0 }}
+                                    <td{{ if gt $length 1 }} rowspan="{{ $length }}"{{ end }}>{{ T (printf "data-path-property-%s" $property) }}</td>
+                                {{ end }}
+                                <td>{{ .context }}</td>
+                                <td>
+                                    <code>{{ .path }}</code>
+                                    {{ if or (strings.HasPrefix .reasoning "https://") (strings.HasPrefix .reasoning "http://") }}
+                                        <a href="{{ .reasoning }}"><img src="/svg/information.svg" class="inline-icon icon-information" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}"></a>
+                                    {{ end }}
+                                </td>
+                                <td>
+                                    {{ $examples := index $.Site.Data.adapterExamples (printf "%s/%s/%s/%s/%s" $.Params.tracker.slug $.Params.slug $property .context .path) }}
+                                    {{ if $examples }}
+                                        {{ $examplesArray := cond (eq (printf "%T" $examples) "[]interface {}") $examples (slice $examples) }}
+                                        {{ range $examplesArray | first 5 }}
+                                            <code>{{ . }}</code><br>
+                                        {{ end }}
+                                    {{ end }}
+                                </td>
+                            </tr>
+                        {{ end }}
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    {{ end }}
+</article>
+{{ end }}

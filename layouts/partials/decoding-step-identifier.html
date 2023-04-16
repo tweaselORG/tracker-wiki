@@ -1,0 +1,31 @@
+{{- $identifier := . -}}
+
+{{- $predefinedPrefixes := (slice "body" "query" "header" "path" "res.body" "res.query" "res.header" "res.path") -}}
+
+{{- $prefix := "" -}}
+{{- $prefixDescription := "" -}}
+
+{{- range $predefinedPrefixes -}}
+    {{- if (hasPrefix $identifier .) -}}
+        {{- $prefix = . -}}
+        {{- $prefixDescription = (T (printf "decoding-step-identifier-prefix-%s" $prefix)) -}}
+        {{- break -}}
+    {{- end -}}
+{{- end -}}
+{{- if not $prefix -}}
+    {{- $prefix = replaceRE `\..+` "" $identifier -}}
+    {{- $prefixDescription = (T "decoding-step-identifier-prefix-variable" $prefix) -}}
+{{- end -}}
+
+{{- $path := replaceRE (printf "^%s.?" $prefix) "" $identifier -}}
+
+{{- $res := "" }}
+{{- if not $path -}}
+    {{- $res = $prefixDescription -}}
+{{- else if strings.HasPrefix $prefix "res." -}}
+    {{- $res = T "decoding-step-identifier-path" (dict "path" $path "prefixDescription" $prefixDescription) -}}
+{{- else -}}
+    {{- $res = T "decoding-step-identifier-jsonpath" (dict "path" $path "prefixDescription" $prefixDescription) -}}
+{{- end -}}
+
+{{- $res -}}
