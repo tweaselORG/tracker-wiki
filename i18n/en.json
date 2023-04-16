@@ -133,5 +133,7 @@
     "data-path-property-volume": { "other": "Volume" },
 
     "footer-legal": "Legal notice & contact",
-    "footer-privacy-policy": "Privacy policy"
+    "footer-privacy-policy": "Privacy policy",
+    "footer-cc0-text": "This wiki and all content therein is licensed under a CC0 1.0 Universal license.",
+    "footer-cc0-link": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
 }

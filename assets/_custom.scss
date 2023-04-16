@@ -46,9 +46,9 @@ footer.site-footer {
     width: 100%;
 
     .container {
-        padding-left: $menu-width;
-        column-gap: $padding-16;
+        padding-left: $menu-width + $padding-16;
         padding-bottom: $padding-16;
+        padding-right: $padding-16;
 
         @media screen and (max-width: $mobile-breakpoint) {
             padding-left: 0;

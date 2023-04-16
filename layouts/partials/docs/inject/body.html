@@ -1,6 +1,9 @@
 <footer class="site-footer">
-    <div class="container flex justify-center">
-        <a href="https://www.{{ T "tracker-list-datenanfragen-link-domain" }}/contact">{{ T "footer-legal" }}</a>
-        <a href="https://www.{{ T "tracker-list-datenanfragen-link-domain" }}/privacy">{{ T "footer-privacy-policy" }}</a>
+    <div class="container flex justify-between">
+        <a rel="license" href="{{ T "footer-cc0-link" }}" title="{{ T "footer-cc0-text" }}" class="no-link-decoration"><img src="{{ "/svg/cc-zero-button.svg" | absURL }}" width="80" height="15" style="vertical-align: -2px;"></a>
+        <div>
+            <a href="https://www.{{ T "tracker-list-datenanfragen-link-domain" }}/contact">{{ T "footer-legal" }}</a> &bull;
+            <a href="https://www.{{ T "tracker-list-datenanfragen-link-domain" }}/privacy">{{ T "footer-privacy-policy" }}</a>
+        </div>
     </div>
 </footer>
