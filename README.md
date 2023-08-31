@@ -26,6 +26,29 @@ If you want to run a development server, you can use:
 yarn watch
 ```
 
+## Contributing
+
+First of all, contributions are very welcome! Please open a pull request and be available, so we can ask follow-up questions on your contribution, and be aware of the [license](#license) the project is published under.
+
+### Adding a new language
+
+To add a new language, the following things need to be done:
+
+1. Create a new folder with the language code for a name in the `content/` directory by copying the `en` language as a reference. the folder should contain:
+    - A `research/` folder containing an `_index.md`
+    - A `t/` folder containing an `_index.md`
+    - An `_index.md`
+2. Delete the generated files in `t`.
+3. Translate the titles and contents of the copied files, especially the `_index.md` files. Untranslated files should be deleted.
+4. Translate the strings by adding a file named like the language code to the `i18n/` folder.
+5. Add the new language to the `config/_default/languages.json` config file.
+
+### Documenting tracker research
+
+This is only a technical explanation of how to document tracker research. A guideline for the quality of the research will be added later.
+
+Each page in the research documentation is added as a [leaf bundle](https://gohugo.io/content-management/page-bundles/#leaf-bundles). Create a folder for the page. It needs an `index.md` containing a title and some kind of content. If you don‘t want to write anything, you still need to add something like a `&nbsp;`, otherwise, the page won‘t be rendered. Sections, e.g. on specific properties, are added as separate markdown files in the same folder. The name of the file will be used as a fragment to the section on the page. You can specify a title in the frontmatter. If you don‘t, it defaults to: »*`<file basename>` Property*«
+
 ## License
 
 This code and the wiki are licensed under a Creative Commons CC0 1.0 Universal license, see the [`LICENSE`](LICENSE) file for details.
