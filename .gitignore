@@ -1,5 +1,8 @@
 content/**/t/*
 content/t/*
+!content/t/_index.md
+!content/**/t/_index.md
+
 
 tmp/
 *.tmp
