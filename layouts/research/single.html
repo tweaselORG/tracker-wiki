@@ -1,0 +1,22 @@
+{{ define "main" }}
+<article class="markdown">
+    <h1>{{ .Title }}</h1>
+
+    {{- if strings.ContainsNonSpace .Plain -}}
+        <p>{{ .Content }}</p>
+    {{- end -}}
+
+    {{- with .Resources.ByType "page" -}}
+        {{ range . }}
+            {{ $section := . }}
+            <section id="{{ .File.ContentBaseName }}">
+                <h2>
+                    {{ with .Title }}{{ . | markdownify }}{{ else }}<code>{{ $section.File.ContentBaseName }}</code> {{ T
+                    "research-property-subheading" }}{{ end }}
+                </h2>
+                <p>{{ .Content }}</p>
+            </section>
+        {{ end }}
+    {{- end -}}
+</article>
+{{ end }}

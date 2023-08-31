@@ -10,7 +10,7 @@
         ]
     },
     "params": {
-        "BookSection": "/t",
+        "BookSection": "*",
         "BookTheme": "auto",
         "BookToC": false
     },
