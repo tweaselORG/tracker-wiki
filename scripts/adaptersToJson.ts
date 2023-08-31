@@ -32,7 +32,7 @@ import { adapters } from 'trackhar';
                 await mkdir(join(trackerContentDir, tracker.slug), { recursive: true });
                 await writeFile(
                     join(trackerContentDir, tracker.slug, '_index.md'),
-                    JSON.stringify(tracker, null, 4) + '\n&nbsp;',
+                    JSON.stringify(tracker, null, 4) + '\n&nbsp;\n',
                     'utf8'
                 );
             })
@@ -54,7 +54,7 @@ import { adapters } from 'trackhar';
                                 adapter,
                                 (_, value) => (value instanceof RegExp ? value.toString() : value),
                                 4
-                            ) + '\n&nbsp;',
+                            ) + '\n&nbsp;\n',
                             'utf8'
                         )
                     )
