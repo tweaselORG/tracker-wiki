@@ -2,7 +2,14 @@ content/**/t/*
 content/t/*
 !content/t/_index.md
 !content/**/t/_index.md
+content/**/research/*
+content/research/*
+!content/research/_index.md
+!content/**/research/_index.md
+!content/**/research/index.md
 
+data/trackharVersion.json
+trackhar_tmp/
 
 tmp/
 *.tmp
