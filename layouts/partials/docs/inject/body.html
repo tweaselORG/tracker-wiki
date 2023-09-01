@@ -1,6 +1,7 @@
 <footer class="site-footer">
     <div class="container flex justify-between">
         <a rel="license" href="{{ T "footer-cc0-link" }}" title="{{ T "footer-cc0-text" }}" class="no-link-decoration"><img src="{{ "/svg/cc-zero-button.svg" | absURL }}" width="80" height="15" style="vertical-align: -2px;"></a>
+        <span>{{ T "footer-version-text" }} <a href="https://github.com/tweaselORG/TrackHAR/releases/tag/{{ $.Site.Data.trackharVersion.trackharReleaseTag }}">{{ $.Site.Data.trackharVersion.trackharReleaseTag }}</a></span>
         <div>
             <a href="https://www.{{ T "tracker-list-datenanfragen-link-domain" }}/contact">{{ T "footer-legal" }}</a> &bull;
             <a href="https://www.{{ T "tracker-list-datenanfragen-link-domain" }}/privacy">{{ T "footer-privacy-policy" }}</a>
