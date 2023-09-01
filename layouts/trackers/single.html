@@ -88,8 +88,17 @@
                                 <td>{{ .context }}</td>
                                 <td>
                                     <code>{{ .path }}</code>
+                                    <!--
+                                        If the reasoning contains an external link, this creates an link to that, if it references a Markdown file in `research`, it links to the corresponding section.
+                                    -->
                                     {{ if or (strings.HasPrefix .reasoning "https://") (strings.HasPrefix .reasoning "http://") }}
-                                        <a href="{{ .reasoning }}"><img src="/svg/information.svg" class="inline-icon icon-information" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}"></a>
+                                        <a href="{{ .reasoning }}"><img src="/svg/information.svg" class="inline-icon icon-information" alt="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}"></a>
+                                    {{ else if (strings.HasSuffix .reasoning ".md") }}
+                                        {{ $path := .reasoning }}
+                                        {{ if not (strings.HasSuffix .reasoning "index.md") }}
+                                            {{ $path = replaceRE `/([^/]*)$` "#$1" (strings.TrimSuffix ".md" .reasoning) 1 }}
+                                        {{ end }}
+                                        <a href="{{ ref $ (print "/research/" $path) }}"><img src="/svg/information.svg" class="inline-icon icon-information" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}" alt="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}"></a>
                                     {{ end }}
                                 </td>
                                 <td>
