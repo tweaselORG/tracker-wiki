@@ -1,4 +1,6 @@
 {{ define "main" }}
+{{ $urlToArchivedUrl := partialCached "functions/archived-urls.html" "" }}
+
 <article class="markdown">
     <h1>{{ .Title }}</h1>
 
@@ -96,7 +98,7 @@
                                         If the reasoning contains an external link, this creates an link to that, if it references a Markdown file in `research`, it links to the corresponding section.
                                     -->
                                     {{ if or (strings.HasPrefix .reasoning "https://") (strings.HasPrefix .reasoning "http://") }}
-                                        <a href="{{ .reasoning }}"><img src="/svg/information.svg" class="inline-icon icon-information" alt="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-desc" }}"></a>
+                                        <a href="{{ .reasoning }}"><img src="/svg/external.svg" class="inline-icon icon-external" alt="{{ T "tracker-single-transmitted-data-table-reasoning-external-link-desc" }}" title="{{ T "tracker-single-transmitted-data-table-reasoning-external-link-desc" }}"></a>
                                     {{ else if (strings.HasSuffix .reasoning ".md") }}
                                         {{ $path := .reasoning }}
                                         {{ if not (strings.HasSuffix .reasoning "index.md") }}
@@ -120,6 +122,44 @@
                 </tbody>
             </table>
         </div>
+
+        {{ $references := slice }}
+        {{ range $property, $path := . }}
+            {{ $pathArray := cond (eq (printf "%T" $path) "[]interface {}") $path (slice $path) }}
+
+            {{ range $index, $element := $pathArray }}
+                {{ if or (strings.HasPrefix .reasoning "https://") (strings.HasPrefix .reasoning "http://") }}
+                    {{/* We need to strip any potential fragment because that might not be included in the CSV. */}}
+                    {{ $urlToLookUp := replaceRE `#.*$` "" .reasoning }}
+
+                    {{ $archivedUrl := false }}
+                    {{ if isset $urlToArchivedUrl $urlToLookUp }}
+                        {{ $archivedUrl = index (index (index $urlToArchivedUrl $urlToLookUp) (printf "%s/%s#%s" $.Params.tracker.slug $.Params.slug $property)) "archivedUrl" }}
+                    {{ end }}
+
+                    {{ $references = $references | append (dict "path" .path "url" .reasoning "archivedUrl" $archivedUrl) }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+
+        {{ if gt (len $references) 0 }}
+            <details>
+                <summary>
+                    References
+                </summary>
+
+                <ul>
+                    {{ range $references }}
+                        <li>
+                            Documentation for <code>{{ .path }}</code>: <a href="{{ .url }}">{{ .url }}</a>
+                            {{ with .archivedUrl }}
+                                <a href="{{ . }}"><img src="/svg/archive.svg" class="inline-icon icon-archive" alt="{{ T "tracker-single-transmitted-data-table-reasoning-link-archive" }}" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-archive" }}"></a>
+                            {{ end }}
+                        </li>
+                    {{ end }}
+                </ul>
+            </details>
+        {{ end }}
     {{ end }}
 </article>
 {{ end }}

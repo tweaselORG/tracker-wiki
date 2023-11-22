@@ -26,7 +26,7 @@
         "fix": "yarn eslint . --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx --fix",
         "lint": "tsc && eslint . --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx && git diff --check",
         "test": "echo 'TODO: No tests specified yet.'",
-        "watch": "tsx scripts/adaptersToJson.ts && hugo server"
+        "watch": "yarn prebuild && hugo server"
     },
     "husky": {
         "hooks": {

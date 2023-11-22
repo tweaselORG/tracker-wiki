@@ -22,6 +22,12 @@
     "tracker-single-transmitted-data-table-reasoning-link-desc": {
         "other": "More details on how we identified this property"
     },
+    "tracker-single-transmitted-data-table-reasoning-external-link-desc": {
+        "other": "Tracker documentation on this property"
+    },
+    "tracker-single-transmitted-data-table-reasoning-link-archive": {
+        "other": "Archived version of the link"
+    },
     "tracker-single-operated-by": { "other": "operated by:" },
 
     "tracker-list-datenanfragen-link": { "other": "get company information on datarequests.org" },

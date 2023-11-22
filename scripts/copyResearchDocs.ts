@@ -8,7 +8,6 @@ import { adapters, type Tracker } from 'trackhar';
  * Copies the research documentation from TrackHAR. Since we do not translate the research docs (yet), we only copy them
  * into the English section.
  */
-
 /* eslint-disable no-console */
 (async () => {
     // Get the current in-use version of TrackHAR
