@@ -2,15 +2,21 @@
 {{ $mapInput := (partial "decoding-step-identifier" .mapInput) }}
 {{ $output := (partial "decoding-step-identifier" .output) }}
 
-{{ $function := (
-    T (printf "decoding-step-function-%s" .function)
-        (dict
-            "Count" (cond (isset . "input") 1 2)
-            "input" $input
-            "mapInput" $mapInput
-            "options" .options
-        )
-    ) | markdownify }}
+{{ $function := "" }}
+{{ if and (eq .function "getProperty") (eq .input "cookie") }}
+    {{ $function = (T "decoding-step-function-get-cookie" (dict "options" .options)) | markdownify }}
+{{ else }}
+    {{ $function = (
+        T (printf "decoding-step-function-%s" .function)
+            (dict
+                "Count" (cond (isset . "input") 1 2)
+                "input" $input
+                "mapInput" $mapInput
+                "options" .options
+            )
+        ) | markdownify }}
+{{ end }}
+
 {{ $store := cond (eq .input .output)
     (T "decoding-step-replace")
     (T "decoding-step-store" (dict "output" $output) | markdownify)

@@ -51,7 +51,11 @@
                 {{ $code := "" }}
                 {{ range . }}
                     {{ if isset . "input" }}
-                        {{ $code = printf "%s%s = %s(%s%s)\n" $code .output .function .input (cond (isset . "options") (printf ", %s" (.options | jsonify)) "") }}
+                        {{ if and (eq .function "getProperty") (isset . "options") (isset .options "path") }}
+                            {{ $code = printf "%s%s = %s.%s\n" $code .output .input .options.path }}
+                        {{ else }}
+                            {{ $code = printf "%s%s = %s(%s%s)\n" $code .output .function .input (cond (isset . "options") (printf ", %s" (.options | jsonify)) "") }}
+                        {{ end }}
                     {{ else }}
                         {{ $code = printf "%s%s = %s.map(%s%s)\n" $code .output .function .mapInput (cond (isset . "options") (printf ", %s" (.options | jsonify)) "") }}
                     {{ end }}
