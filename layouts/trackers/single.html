@@ -108,7 +108,7 @@
                                     {{ end }}
                                 </td>
                                 <td>
-                                    {{ $examples := index $.Site.Data.adapterExamples (printf "%s/%s/%s/%s/%s" $.Params.tracker.slug $.Params.slug $property .context .path) }}
+                                    {{ $examples := index $.Site.Data.adapterExamples (lower (printf "%s/%s/%s/%s/%s" $.Params.tracker.slug $.Params.slug $property .context .path)) }}
                                     {{ if $examples }}
                                         {{ $examplesArray := cond (eq (printf "%T" $examples) "[]interface {}") $examples (slice $examples) }}
                                         {{ range $examplesArray | first 5 }}
