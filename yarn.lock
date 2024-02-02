@@ -1322,6 +1322,11 @@ base-x@^3.0.8:
   dependencies:
     safe-buffer "^5.0.1"
 
+base64-search@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/base64-search/-/base64-search-1.0.0.tgz#8e3fe74d9999f056c26f69a3d3b7eb7b23f4c6f9"
+  integrity sha512-EHQrX/E0N/ODCli/npLoWGX5US3jWl5DEUHboNMlRDCbSWVK1dk5xcYSrcjz48bByzf1S0OI+VS4iDuY9Y85JA==
+
 binary-searching@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/binary-searching/-/binary-searching-2.0.5.tgz#ab6d08d51cd1b58878ae208ab61988f885b22dd3"
@@ -1835,6 +1840,11 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
+escape-string-regexp@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-5.0.0.tgz#4683126b500b61762f2dbebace1806e8be31b1c8"
+  integrity sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==
+
 eslint-config-prettier@^8.6.0:
   version "8.8.0"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.8.0.tgz#bfda738d412adc917fd7b038857110efe98c9348"
@@ -2052,6 +2062,11 @@ fastq@^1.6.0:
   integrity sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==
   dependencies:
     reusify "^1.0.4"
+
+fflate@^0.8.0:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.8.1.tgz#1ed92270674d2ad3c73f077cd0acf26486dae6c9"
+  integrity sha512-/exOvEuc+/iaUm105QIiOt4LpBdMTWsXxqR0HDF35vx3fmaKzw7354gTilCh5rkzEt8WYyG//ku3h3nRmd7CHQ==
 
 file-entry-cache@^6.0.1:
   version "6.0.1"
@@ -3839,13 +3854,16 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-trackhar@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/trackhar/-/trackhar-0.1.1.tgz#1397d3a97c7a7a5adcdc4b24438e21e98fcf6986"
-  integrity sha512-GEx9kAofrXQAGJqHGX28tB4COPtyz8jLD6Yo2cPUiHKdWJTAYddhauZ+1aZhk1d785V62UukEb5x3DjwkJenjw==
+trackhar@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/trackhar/-/trackhar-0.3.0.tgz#af727d395739e7c26aa5d9fa8e7325e8fb272954"
+  integrity sha512-EHB5Z/2xMxVIrSD0lhHk7j4bIE+DYdY4AV1i4F035+lunUhvx7dQssiNglFFkaAm7P9f2A2b832uISbcsS2jkA==
   dependencies:
     "@types/har-format" "^1.2.10"
+    base64-search "^1.0.0"
     cross-dirname "^0.1.0"
+    escape-string-regexp "^5.0.0"
+    fflate "^0.8.0"
     jsonpath-plus "^7.2.0"
     protobufjs "^7.2.3"
     qs "^6.11.1"

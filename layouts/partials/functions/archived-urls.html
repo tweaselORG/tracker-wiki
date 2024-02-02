@@ -1,0 +1,18 @@
+{{ $urls := getCSV "," "content/en/research/archived-urls.csv"}}
+{{ $urlToArchivedUrl := dict }}
+{{ range $urls }}
+    {{ $originalUrl :=  index . 0 }}
+    {{ $archivedUrl :=  index . 1 }}
+    {{ $timestamp :=  index . 2 }}
+    {{ $dataPathToArchivedUrl := dict }}
+    {{ range strings.Split (index . 3) ";" }}
+        <!-- Apparently, the containedDataPaths are loaded in lowercase in the adapter template, so we need to lowercase the ID here, too, so that the URLs are read correctly. -->
+        {{ $property := (lower .)}}
+        <!-- We might have older changes in the table that we do not want to overwrite -->
+        {{ if le (index (index $urlToArchivedUrl $originalUrl) $property).timestamp $timestamp }}
+            {{ $dataPathToArchivedUrl = merge $dataPathToArchivedUrl (dict $property (dict "archivedUrl" $archivedUrl "timestamp" $timestamp )) }}
+        {{ end }}
+    {{ end }}
+    {{ $urlToArchivedUrl = merge $urlToArchivedUrl (dict $originalUrl $dataPathToArchivedUrl) }}
+{{ end }}
+{{ return $urlToArchivedUrl}}

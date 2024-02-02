@@ -28,7 +28,9 @@ table.data-table {
     width: 1em;
     height: 1em;
 
-    &.icon-information {
+    &.icon-information,
+    &.icon-archive,
+    &.icon-external {
         vertical-align: -2px;
     }
 }

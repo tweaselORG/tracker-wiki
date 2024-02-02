@@ -11,6 +11,9 @@
     "tracker-single-transmitted-data-table-reasoning-link-desc": {
         "other": "Weitere Details dazu, wie wir dieses Datum zugeordnet haben"
     },
+    "tracker-single-transmitted-data-table-reasoning-external-link-desc": {
+        "other": "Tracker-Dokumentation zu diesem Datum"
+    },
     "tracker-list-datenanfragen-link": { "other": "Unternehmensinformation auf Datenanfragen.de erhalten." },
     "tracker-list-datenanfragen-link-domain": { "other": "datenanfragen.de" },
     "tracker-list-exodus-link": { "other": "Den Eintrag für den Tracker in der Exodus-Datenbank ansehen." },

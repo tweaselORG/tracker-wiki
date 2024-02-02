@@ -26,7 +26,7 @@
         "fix": "yarn eslint . --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx --fix",
         "lint": "tsc && eslint . --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx && git diff --check",
         "test": "echo 'TODO: No tests specified yet.'",
-        "watch": "tsx scripts/adaptersToJson.ts && hugo server"
+        "watch": "yarn prebuild && hugo server"
     },
     "husky": {
         "hooks": {
@@ -44,7 +44,7 @@
     "prettier": "@baltpeter/prettier-config",
     "dependencies": {
         "cross-dirname": "^0.1.0",
-        "trackhar": "^0.1.1"
+        "trackhar": "^0.3.0"
     },
     "devDependencies": {
         "@baltpeter/eslint-config": "2.1.2",
