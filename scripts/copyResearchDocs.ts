@@ -1,5 +1,4 @@
 import { execa } from 'execa';
-import { writeFileSync } from 'fs';
 import { copyFile, cp, mkdir, readdir, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { adapters, type Tracker } from 'trackhar';
@@ -32,7 +31,8 @@ import { adapters, type Tracker } from 'trackhar';
     ]);
 
     const trackerNames = adapters.reduce<Record<string, Tracker['name']>>((trackers, adapter) => {
-        if (!trackers[adapter.tracker.slug]) trackers[adapter.tracker.slug] = adapter.tracker.name;
+        if (!trackers[adapter.tracker.slug])
+            trackers[adapter.tracker.slug] = adapter.tracker.name || adapter.tracker.slug;
         return trackers;
     }, {});
 
@@ -46,15 +46,17 @@ import { adapters, type Tracker } from 'trackhar';
     await rm('content/en/research', { recursive: true, force: true });
     console.info('Copying fresh content…');
     // Add index.md files if there are none because hugo wants those to create the pages.
-    (await readdir('trackhar_tmp/research-docs', { withFileTypes: true }))
-        .filter((dirent) => dirent.isDirectory())
-        .forEach((dir) => {
-            writeFileSync(
-                join('trackhar_tmp/research-docs', dir.name, 'index.md'),
-                `{\n"title":"${trackerNames[dir.name]}"\n}\n&nbsp;`,
-                { flag: 'wx' }
-            );
-        });
+    await Promise.all(
+        (await readdir('trackhar_tmp/research-docs', { withFileTypes: true }))
+            .filter((dirent) => dirent.isDirectory())
+            .map((dir) =>
+                writeFile(
+                    join('trackhar_tmp/research-docs', dir.name, 'index.md'),
+                    `{\n"title":"${trackerNames[dir.name]}"\n}\n&nbsp;`,
+                    { flag: 'wx' }
+                )
+            )
+    );
     await cp('trackhar_tmp/research-docs', 'content/en/research', { recursive: true });
 
     await rm('trackhar_tmp', { recursive: true, force: true });
