@@ -29,6 +29,8 @@
         "other": "Archived version of the link"
     },
     "tracker-single-operated-by": { "other": "operated by:" },
+    "tracker-single-reference-entry": { "other": "Documentation for `{{ .path }}`" },
+    "tracker-single-references-title": { "other": "References" },
 
     "tracker-list-datenanfragen-link": { "other": "get company information on datarequests.org" },
     "tracker-list-datenanfragen-link-domain": { "other": "datarequests.org" },

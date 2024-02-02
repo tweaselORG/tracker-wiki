@@ -145,16 +145,16 @@
         {{ if gt (len $references) 0 }}
             <details>
                 <summary>
-                    References
+                    {{ T "tracker-single-references-title" }}
                 </summary>
 
                 <ul>
                     {{ range $references }}
                         <li>
-                            Documentation for <code>{{ .path }}</code>: <a href="{{ .url }}">{{ .url }}</a>
-                            {{ with .archivedUrl }}
+                            {{ T "tracker-single-reference-entry" (dict "path" .path) | markdownify }}: <a href="{{ .url }}">{{ .url }}</a>&nbsp;
+                            {{- with .archivedUrl -}}
                                 <a href="{{ . }}"><img src="/svg/archive.svg" class="inline-icon icon-archive" alt="{{ T "tracker-single-transmitted-data-table-reasoning-link-archive" }}" title="{{ T "tracker-single-transmitted-data-table-reasoning-link-archive" }}"></a>
-                            {{ end }}
+                            {{- end -}}
                         </li>
                     {{ end }}
                 </ul>
