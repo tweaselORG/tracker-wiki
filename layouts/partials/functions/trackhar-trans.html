@@ -1,0 +1,16 @@
+{{ $translationKey := index . 0 }}
+{{ $scope := index . 1 }}
+{{ $root := index . 2 }}
+
+{{ $language := $root.Site.LanguageCode }}
+
+{{ $translationsInScope := (index (index $root.Site.Data.trackharTranslations $language) $scope) }}
+
+{{ $res := ""}}
+{{ range $key, $translation := $translationsInScope }}
+    {{ if or (eq $key $translationKey) (eq (strings.ToLower $key) $translationKey) }}
+        {{ $res = $translation }}
+    {{ end }}
+{{ end }}
+
+{{ return $res }}

@@ -1,26 +1,26 @@
 import { getDirname } from 'cross-dirname';
 import { mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
-import type { Tracker } from 'trackhar';
+import type { Adapter, Tracker } from 'trackhar';
 import { adapters } from 'trackhar';
 
 (async () => {
     const trackers = adapters.reduce<
         Record<
             string,
-            Tracker & { adapters: string[]; title: Tracker['name']; bookCollapseSection: true; bookFlatSection: false }
+            Tracker & { adapters: Adapter[]; title: Tracker['name']; bookCollapseSection: true; bookFlatSection: false }
         >
     >((trackers, adapter) => {
         if (!trackers[adapter.tracker.slug])
             trackers[adapter.tracker.slug] = {
                 ...adapter.tracker,
-                adapters: [adapter.slug],
+                adapters: [adapter],
                 title: adapter.tracker.name,
                 // Cascading these causes some weird non-deterministic bug, where the top-level menu item is sometimes collapsed. Therefore, we set these on each entry individually.
                 bookCollapseSection: true,
                 bookFlatSection: false,
             };
-        else trackers[adapter.tracker.slug]!.adapters.push(adapter.slug);
+        else trackers[adapter.tracker.slug]!.adapters.push(adapter);
         return trackers;
     }, {});
 
@@ -56,7 +56,7 @@ import { adapters } from 'trackhar';
 
                         return {
                             ...adapter,
-                            title: adapter.slug,
+                            title: adapter.name,
                         };
                     })
                     .map((adapter) =>
