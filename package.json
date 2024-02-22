@@ -21,7 +21,7 @@
         }
     ],
     "scripts": {
-        "prebuild": "tsx scripts/copyResearchDocs.ts && tsx scripts/adaptersToJson.ts",
+        "prebuild": "tsx scripts/copyResearchDocs.ts && tsx scripts/adaptersToJson.ts && tsx scripts/translations.ts",
         "build": "yarn prebuild && hugo --baseURL 'https://trackers.tweasel.org' --minify",
         "fix": "yarn eslint . --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx --fix",
         "lint": "tsc && eslint . --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx && git diff --check",
@@ -44,7 +44,7 @@
     "prettier": "@baltpeter/prettier-config",
     "dependencies": {
         "cross-dirname": "^0.1.0",
-        "trackhar": "^0.3.0"
+        "trackhar": "file:.yalc/trackhar"
     },
     "devDependencies": {
         "@baltpeter/eslint-config": "2.1.2",

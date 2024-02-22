@@ -89,7 +89,7 @@
                         {{ range $index, $element := $pathArray }}
                             <tr>
                                 {{ if eq $index 0 }}
-                                    <td{{ if gt $length 1 }} rowspan="{{ $length }}"{{ end }}>{{ T (printf "data-path-property-%s" $property) }}</td>
+                                    <td{{ if gt $length 1 }} rowspan="{{ $length }}"{{ end }}>{{ partialCached "trackhar-trans" (slice $property "properties" $) (slice $property "properties") }}</td>
                                 {{ end }}
                                 <td>{{ .context }}</td>
                                 <td>
