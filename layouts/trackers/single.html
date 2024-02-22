@@ -2,7 +2,7 @@
 {{ $urlToArchivedUrl := partialCached "functions/archived-urls.html" "" }}
 
 <article class="markdown">
-    <h1>{{ .Title }}</h1>
+    <h1>{{ .Title }} (<code>{{ .Params.tracker.slug }}/{{ .Params.slug }}</code>)</h1>
 
     {{ with .Params.tracker }}
         {{ $detailsLinks := (slice) }}
