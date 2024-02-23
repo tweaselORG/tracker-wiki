@@ -46,6 +46,8 @@ const App = () => {
         })();
     }, []);
 
+    const filteredRequests = requests.filter((r) => !hideUnmatched || r.result);
+
     return (
         <>
             <label>
@@ -87,128 +89,125 @@ const App = () => {
             <div>
                 {error ? (
                     <em>{error}</em>
+                ) : filteredRequests.length === 0 ? (
+                    <em>{hideUnmatched ? t('no-matching-requests') : t('no-requests')}</em>
                 ) : (
-                    requests
-                        .filter((r) => !hideUnmatched || r.result)
-                        .map(({ request, result }) => {
-                            const adapter = result?.[0]?.adapter;
+                    filteredRequests.map(({ request, result }) => {
+                        const adapter = result?.[0]?.adapter;
 
-                            return (
-                                <>
-                                    <h2>
-                                        <code style="word-break: break-all;">
-                                            <strong>{request.method}</strong> {request.scheme}://{request.host}
-                                            {request.path}
-                                        </code>
-                                    </h2>
+                        return (
+                            <>
+                                <h2>
+                                    <code style="word-break: break-all;">
+                                        <strong>{request.method}</strong> {request.scheme}://{request.host}
+                                        {request.path}
+                                    </code>
+                                </h2>
 
-                                    {result ? (
-                                        <>
-                                            <em>
-                                                {adapter === 'indicators' ? (
-                                                    t('matched-by-indicators')
-                                                ) : (
-                                                    <>
-                                                        {t('matched-by-adapter')}{' '}
-                                                        <a href={absUrl('t/' + adapter)} target="_blank">
-                                                            {adapter}
-                                                        </a>
-                                                    </>
-                                                )}
-                                            </em>
+                                {result ? (
+                                    <>
+                                        <em>
+                                            {adapter === 'indicators' ? (
+                                                t('matched-by-indicators')
+                                            ) : (
+                                                <>
+                                                    {t('matched-by-adapter')}{' '}
+                                                    <a href={absUrl('t/' + adapter)} target="_blank">
+                                                        {adapter}
+                                                    </a>
+                                                </>
+                                            )}
+                                        </em>
 
-                                            <table class="data-table">
-                                                <thead>
+                                        <table class="data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 25%;">
+                                                        {_t(
+                                                            'tracker-single-transmitted-data-table-head-property',
+                                                            'hugo'
+                                                        )}
+                                                    </th>
+                                                    <th style="width: 10%;">
+                                                        {_t(
+                                                            'tracker-single-transmitted-data-table-head-context',
+                                                            'hugo'
+                                                        )}
+                                                    </th>
+                                                    <th style="width: 25%;">
+                                                        {_t('tracker-single-transmitted-data-table-head-path', 'hugo')}
+                                                    </th>
+                                                    <th style="width: 40%;">{t('value')}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {result.map((r) => (
                                                     <tr>
-                                                        <th style="width: 25%;">
-                                                            {_t(
-                                                                'tracker-single-transmitted-data-table-head-property',
-                                                                'hugo'
-                                                            )}
-                                                        </th>
-                                                        <th style="width: 10%;">
-                                                            {_t(
-                                                                'tracker-single-transmitted-data-table-head-context',
-                                                                'hugo'
-                                                            )}
-                                                        </th>
-                                                        <th style="width: 25%;">
-                                                            {_t(
-                                                                'tracker-single-transmitted-data-table-head-path',
-                                                                'hugo'
-                                                            )}
-                                                        </th>
-                                                        <th style="width: 40%;">{t('value')}</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {result.map((r) => (
-                                                        <tr>
-                                                            <td>{_t(r.property as string, 'properties')}</td>
-                                                            <td>{r.context}</td>
-                                                            <td>
-                                                                <code>
-                                                                    {r.path}{' '}
-                                                                    {r.reasoning.startsWith('https://') ||
-                                                                    r.reasoning.startsWith('http://') ? (
-                                                                        <a
-                                                                            href={r.reasoning}
-                                                                            rel="nofollow"
-                                                                            target="_blank">
-                                                                            <img
-                                                                                src="/svg/external.svg"
-                                                                                class="inline-icon icon-external"
-                                                                                alt={_t(
-                                                                                    'tracker-single-transmitted-data-table-reasoning-external-link-desc',
-                                                                                    'hugo'
-                                                                                )}
-                                                                                title={_t(
-                                                                                    'tracker-single-transmitted-data-table-reasoning-external-link-desc',
-                                                                                    'hugo'
-                                                                                )}
-                                                                            />
-                                                                        </a>
-                                                                    ) : r.reasoning.endsWith('.md') ? (
-                                                                        <a
-                                                                            href={absUrl(
-                                                                                'research/' +
-                                                                                    r.reasoning
-                                                                                        .replace(/\/([^/]+)$/, '#$1')
-                                                                                        .replace(/.md$/, '')
+                                                        <td>{_t(r.property as string, 'properties')}</td>
+                                                        <td>{r.context}</td>
+                                                        <td>
+                                                            <code>
+                                                                {r.path}{' '}
+                                                                {r.reasoning.startsWith('https://') ||
+                                                                r.reasoning.startsWith('http://') ? (
+                                                                    <a
+                                                                        href={r.reasoning}
+                                                                        rel="nofollow"
+                                                                        target="_blank">
+                                                                        <img
+                                                                            src="/svg/external.svg"
+                                                                            class="inline-icon icon-external"
+                                                                            alt={_t(
+                                                                                'tracker-single-transmitted-data-table-reasoning-external-link-desc',
+                                                                                'hugo'
                                                                             )}
-                                                                            target="_blank">
-                                                                            <img
-                                                                                src="/svg/information.svg"
-                                                                                class="inline-icon icon-information"
-                                                                                title={_t(
-                                                                                    'tracker-single-transmitted-data-table-reasoning-link-desc',
-                                                                                    'hugo'
-                                                                                )}
-                                                                                alt={_t(
-                                                                                    'tracker-single-transmitted-data-table-reasoning-link-desc',
-                                                                                    'hugo'
-                                                                                )}
-                                                                            />
-                                                                        </a>
-                                                                    ) : (
-                                                                        <></>
-                                                                    )}
-                                                                </code>
-                                                            </td>
-                                                            <td>
-                                                                <code>{r.value}</code>
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </>
-                                    ) : (
-                                        <em>{t('unsupported-endpoint')}</em>
-                                    )}
-                                </>
-                            );
-                        })
+                                                                            title={_t(
+                                                                                'tracker-single-transmitted-data-table-reasoning-external-link-desc',
+                                                                                'hugo'
+                                                                            )}
+                                                                        />
+                                                                    </a>
+                                                                ) : r.reasoning.endsWith('.md') ? (
+                                                                    <a
+                                                                        href={absUrl(
+                                                                            'research/' +
+                                                                                r.reasoning
+                                                                                    .replace(/\/([^/]+)$/, '#$1')
+                                                                                    .replace(/.md$/, '')
+                                                                        )}
+                                                                        target="_blank">
+                                                                        <img
+                                                                            src="/svg/information.svg"
+                                                                            class="inline-icon icon-information"
+                                                                            title={_t(
+                                                                                'tracker-single-transmitted-data-table-reasoning-link-desc',
+                                                                                'hugo'
+                                                                            )}
+                                                                            alt={_t(
+                                                                                'tracker-single-transmitted-data-table-reasoning-link-desc',
+                                                                                'hugo'
+                                                                            )}
+                                                                        />
+                                                                    </a>
+                                                                ) : (
+                                                                    <></>
+                                                                )}
+                                                            </code>
+                                                        </td>
+                                                        <td>
+                                                            <code>{r.value}</code>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </>
+                                ) : (
+                                    <em>{t('unsupported-endpoint')}</em>
+                                )}
+                            </>
+                        );
+                    })
                 )}
             </div>
         </>

@@ -112,6 +112,8 @@
     "trackhar-ui-matched-by-adapter": "was matched by adapter:",
     "trackhar-ui-matched-by-indicators": "was matched by indicator values",
     "trackhar-ui-value": "Value",
+    "trackhar-ui-no-matching-requests": "no matching requests",
+    "trackhar-ui-no-requests": "no requests",
     "trackhar-ui-parsing-failed-har": "Parsing or analyzing your HAR file failed.",
     "trackhar-ui-parsing-failed-request": "Fetching or analyzing the specified request failed."
 }
