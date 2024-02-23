@@ -37,6 +37,7 @@ To add a new language, the following things need to be done:
 1. Create a new folder with the language code for a name in the `content/` directory by copying the `de` language as a reference. The folder should contain:
     - A `research/` folder containing an `_index.md`, in which you link to the English version of the research documentation, since we do not currently translate it.
     - A `t/` folder containing an `_index.md`
+    - A `trackhar.md` file, translated from the English version.
     - An `_index.md`
 2. Delete the generated files in `t`.
 3. Translate the titles and contents of the copied files, especially the `_index.md` files. Untranslated files should be deleted.

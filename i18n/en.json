@@ -104,5 +104,13 @@
     "footer-legal": "Legal notice & contact",
     "footer-privacy-policy": "Privacy policy",
     "footer-cc0-text": "This wiki and all content therein is licensed under a CC0 1.0 Universal license.",
-    "footer-cc0-link": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    "footer-cc0-link": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+
+    "trackhar-ui-choose-har": "Choose HAR file:",
+    "trackhar-ui-hide-unmatched": "Hide unmatched requests",
+    "trackhar-ui-unsupported-endpoint": "unsupported endpoint",
+    "trackhar-ui-matched-by-adapter": "was matched by adapter:",
+    "trackhar-ui-matched-by-indicators": "was matched by indicator values",
+    "trackhar-ui-value": "Value",
+    "trackhar-ui-parsing-failed": "Parsing or analyzing your HAR file failed."
 }
