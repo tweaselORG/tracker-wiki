@@ -1,6 +1,6 @@
 {
-    "extends": "@baltpeter/tsconfig",
-    "include": ["scripts/**/*"],
+    "extends": "@baltpeter/tsconfig/tsconfig.preact.json",
+    "include": ["scripts/**/*", "assets/js/**/*"],
 
     "compilerOptions": {
         "resolveJsonModule": true

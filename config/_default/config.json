@@ -7,6 +7,16 @@
             {
                 "path": "github.com/alex-shpak/hugo-book"
             }
+        ],
+        "mounts": [
+            {
+                "source": "data",
+                "target": "data"
+            },
+            {
+                "source": "i18n",
+                "target": "data"
+            }
         ]
     },
     "params": {
@@ -26,5 +36,8 @@
             }
         }
     },
-    "disableLanguages": ["de"]
+    "disableLanguages": ["de"],
+    "build": {
+        "noJSConfigInAssets": true
+    }
 }
