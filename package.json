@@ -43,6 +43,7 @@
     },
     "prettier": "@baltpeter/prettier-config",
     "dependencies": {
+        "buffer": "^6.0.3",
         "cross-dirname": "^0.1.0",
         "preact": "^10.19.6",
         "trackhar": "^0.4.1"

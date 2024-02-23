@@ -4,10 +4,12 @@
 // @jsxRuntime automatic
 // eslint-disable-next-line import/no-unresolved
 import { baseUrl } from '@params';
+import { Buffer } from 'buffer';
 import type { Har } from 'har-format';
 import { render } from 'preact';
-import { useState } from 'preact/hooks';
-import { processRequest, unhar, type AnnotatedResult } from 'trackhar';
+import { useEffect, useState } from 'preact/hooks';
+import { processRequest, unhar, type AnnotatedResult, type Request } from 'trackhar';
+import { getFragmentParams } from './util/browser';
 import { t as _t } from './util/i18n';
 
 const t = (key: string) => _t('trackhar-ui-' + key, 'hugo');
@@ -16,9 +18,33 @@ const absUrl = (path: string) => baseUrl + path;
 const App = () => {
     const [hideUnmatched, setHideUnmatched] = useState<boolean>(true);
     const [error, setError] = useState<string>();
-    const [requests, setRequests] = useState<
-        { request: Har['log']['entries'][number]['request']; result: AnnotatedResult | undefined }[]
-    >([]);
+    const [requests, setRequests] = useState<{ request: Request; result: AnnotatedResult | undefined }[]>([]);
+
+    useEffect(() => {
+        const fragmentParams = getFragmentParams();
+        const requestId = fragmentParams['request-id'];
+        if (!requestId) return;
+
+        (async () => {
+            try {
+                const requestData = await fetch(
+                    `https://data.tweasel.org/data/requests/${requestId}.json?_shape=array&_json=headers&_json=cookies`
+                ).then((r) => r.json());
+                const request: Request | undefined = requestData[0];
+                if (!request) throw new Error('No request.');
+
+                const content = request.content as string | { $base64: true; encoded: string } | undefined;
+                if (content && typeof content !== 'string' && content['$base64'] === true)
+                    request.content = Buffer.from(content.encoded, 'base64').toString('binary');
+
+                const trackHarResult = processRequest(request);
+                setRequests([{ request, result: trackHarResult }]);
+            } catch (err) {
+                console.error('Failed to fetch or parse:', err);
+                setError(t('parsing-failed-request'));
+            }
+        })();
+    }, []);
 
     return (
         <>
@@ -39,12 +65,10 @@ const App = () => {
                             const requests = unhar(har);
                             const trackHarResult = requests.map((r) => processRequest(r));
 
-                            setRequests(
-                                har.log.entries.map((e, i) => ({ request: e.request, result: trackHarResult[i] }))
-                            );
+                            setRequests(requests.map((request, i) => ({ request, result: trackHarResult[i] })));
                         } catch (error) {
                             console.error('Parsing failed:', error);
-                            setError(t('parsing-failed'));
+                            setError(t('parsing-failed-har'));
                         }
                     }}
                 />
@@ -73,7 +97,8 @@ const App = () => {
                                 <>
                                     <h2>
                                         <code style="word-break: break-all;">
-                                            <strong>{request.method}</strong> {request.url}
+                                            <strong>{request.method}</strong> {request.scheme}://{request.host}
+                                            {request.path}
                                         </code>
                                     </h2>
 
