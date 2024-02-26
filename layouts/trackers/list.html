@@ -10,12 +10,17 @@
              {{ with .Params.exodusId }}<li><a href="https://reports.exodus-privacy.eu.org/{{ $.Language }}/trackers/{{ . }}">{{ T "tracker-list-exodus-link" }}</a></li>{{ end }}
         </ul>
 
-        {{ with .Params.adapters}}
+        {{ with .Params.description }}
+            {{ (partialCached "functions/trackhar-trans" (slice . "tracker-descriptions" $) (slice . "tracker-descriptions")) | markdownify }}
+        {{ end }}
+
+        {{ $trackerSlug := .Params.slug }}
+        {{ with .Params.adapters }}
             <h2>{{ T "tracker-list-tracker-adapters-heading" }}</h2>
             <p>{{ T "tracker-list-tracker-adapters-explanation" }}</p>
             <ul>
-                {{ range .}}
-                    <li><a href="{{ (print "t/" $.Params.slug "/" . ) | absURL }}">{{ . }}</a></li>
+                {{ range . }}
+                    <li><a href="{{ (print "t/" $.Params.slug "/" .slug ) | absURL }}">{{ .name }} (<code>{{ $trackerSlug }}/{{ .slug }}</code>)</a></li>
                 {{ end }}
             </ul>
         {{ end }}

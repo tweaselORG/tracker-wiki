@@ -8,7 +8,7 @@ The live version is hosted at [trackers.tweasel.org](https://trackers.tweasel.or
 
 ## Build
 
-tracker-wiki is build statically using the extended version of [Hugo](https://gohugo.io/) (take a look at [how to install it](https://gohugo.io/installation/)). You need at least version `v0.105.0+extended` to build it yourself.
+tracker-wiki is build statically using the extended version of [Hugo](https://gohugo.io/) (take a look at [how to install it](https://gohugo.io/installation/)). You need at least version `v0.123.3+extended` to build it yourself.
 You'll also need a current version of [Node.js](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/) (or npm).
 
 Then you can run the following to build the HTML:
@@ -37,6 +37,7 @@ To add a new language, the following things need to be done:
 1. Create a new folder with the language code for a name in the `content/` directory by copying the `de` language as a reference. The folder should contain:
     - A `research/` folder containing an `_index.md`, in which you link to the English version of the research documentation, since we do not currently translate it.
     - A `t/` folder containing an `_index.md`
+    - A `trackhar.md` file, translated from the English version.
     - An `_index.md`
 2. Delete the generated files in `t`.
 3. Translate the titles and contents of the copied files, especially the `_index.md` files. Untranslated files should be deleted.

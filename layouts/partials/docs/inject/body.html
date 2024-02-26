@@ -8,3 +8,14 @@
         </div>
     </div>
 </footer>
+
+{{ if eq .Type "trackhar" }}
+    {{ $language := $.Site.LanguageCode }}
+    {{ $translations := merge
+        (index $.Site.Data.trackharTranslations $language)
+        (dict "hugo" (index $.Site.Data $language))
+    }}
+
+    {{ $bundle := resources.Get "js/trackhar.tsx" | js.Build (dict "minify" true "target" "es2015" "params" (dict "language" $language "translations" $translations "baseUrl" $.Site.BaseURL)) | fingerprint }}
+    <script src="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}"></script>
+{{ end }}
