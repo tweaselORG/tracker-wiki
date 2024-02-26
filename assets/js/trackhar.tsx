@@ -14,7 +14,7 @@ const absUrl = (path: string) => baseUrl + path;
 const App = () => {
     const [hideUnmatched, setHideUnmatched] = useState<boolean>(true);
     const [error, setError] = useState<string>();
-    const [requests, setRequests] = useState<{ request: Request; result: AnnotatedResult | undefined }[]>([]);
+    const [requests, setRequests] = useState<{ request: Request; result: AnnotatedResult | undefined }[]>();
 
     useEffect(() => {
         const fragmentParams = getFragmentParams();
@@ -42,7 +42,7 @@ const App = () => {
         })();
     }, []);
 
-    const filteredRequests = requests.filter((r) => !hideUnmatched || r.result);
+    const filteredRequests = requests?.filter((r) => !hideUnmatched || r.result);
 
     return (
         <>
@@ -85,6 +85,8 @@ const App = () => {
             <div>
                 {error ? (
                     <em>{error}</em>
+                ) : !filteredRequests ? (
+                    <></>
                 ) : filteredRequests.length === 0 ? (
                     <em>{hideUnmatched ? t('no-matching-requests') : t('no-requests')}</em>
                 ) : (
