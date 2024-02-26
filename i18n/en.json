@@ -107,6 +107,9 @@
     "footer-cc0-link": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
 
     "trackhar-ui-choose-har": "Choose HAR file:",
+    "trackhar-ui-indicators-heading": "Indicator matching (optional)",
+    "trackhar-ui-indicators-explanation": "By default, TrackHAR uses adapters hand-written for specific tracking endpoints. Additionally, it can optionally perform indicator matching to search for user-provided known honey data values (such as the advertising ID or geolocation) in the requests in plain text, base64-encoded and URL-encoded form. If you want to use indicator matching, select a JSON file with your indicator values in the following format:",
+    "trackhar-ui-choose-indicators": "Choose indicators JSON:",
     "trackhar-ui-hide-unmatched": "Hide unmatched requests",
     "trackhar-ui-unsupported-endpoint": "unsupported endpoint",
     "trackhar-ui-matched-by-adapter": "was matched by adapter:",
@@ -115,5 +118,6 @@
     "trackhar-ui-no-matching-requests": "no matching requests",
     "trackhar-ui-no-requests": "no requests",
     "trackhar-ui-parsing-failed-har": "Parsing or analyzing your HAR file failed.",
+    "trackhar-ui-parsing-failed-indicators": "Parsing or analyzing your indicators JSON failed.",
     "trackhar-ui-parsing-failed-request": "Fetching or analyzing the specified request failed."
 }
