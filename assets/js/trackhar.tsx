@@ -4,7 +4,7 @@ import { Buffer } from 'buffer';
 import type { Har } from 'har-format';
 import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { processRequest, unhar, type AnnotatedResult, type Request } from 'trackhar';
+import { processRequest, unhar, type AnnotatedResult, type IndicatorValues, type Request } from 'trackhar';
 import { getFragmentParams } from './util/browser';
 import { t as _t } from './util/i18n';
 
@@ -15,6 +15,7 @@ const App = () => {
     const [hideUnmatched, setHideUnmatched] = useState<boolean>(true);
     const [error, setError] = useState<string>();
     const [requests, setRequests] = useState<{ request: Request; result: AnnotatedResult | undefined }[]>();
+    const [indicators, setIndicators] = useState<IndicatorValues>();
 
     useEffect(() => {
         const fragmentParams = getFragmentParams();
@@ -61,11 +62,14 @@ const App = () => {
                         try {
                             const har: Har = JSON.parse(await file.text());
                             const requests = unhar(har);
-                            const trackHarResult = requests.map((r) => processRequest(r));
 
-                            setRequests(requests.map((request, i) => ({ request, result: trackHarResult[i] })));
+                            const result = requests.map((request) => ({
+                                request,
+                                result: processRequest(request, { indicatorValues: indicators }),
+                            }));
+                            setRequests(result);
                         } catch (error) {
-                            console.error('Parsing failed:', error);
+                            console.error('Parsing HAR failed:', error);
                             setError(t('parsing-failed-har'));
                         }
                     }}
@@ -81,6 +85,50 @@ const App = () => {
                 />{' '}
                 {t('hide-unmatched')}
             </label>
+
+            <details style="padding: 10px;">
+                <summary>{t('indicators-heading')}</summary>
+
+                {t('indicators-explanation')}
+
+                <pre>
+                    {`{
+    "localIp": [ "10.0.0.2", "fd31:4159::a2a1" ],
+    "idfa": "6a1c1487-a0af-4223-b142-a0f4621d0311"
+}`}
+                </pre>
+
+                <label>
+                    {t('choose-indicators')}{' '}
+                    <input
+                        type="file"
+                        accept=".json,application/json"
+                        multiple={false}
+                        onChange={async (e) => {
+                            const file = e.currentTarget.files?.[0];
+                            if (!file) return;
+
+                            setError(undefined);
+
+                            try {
+                                const indicators: IndicatorValues = JSON.parse(await file.text());
+                                setIndicators(indicators);
+
+                                if (!requests) return;
+
+                                const result = requests.map((r) => ({
+                                    request: r.request,
+                                    result: processRequest(r.request, { indicatorValues: indicators }),
+                                }));
+                                setRequests(result);
+                            } catch (error) {
+                                console.error('Parsing indicators failed:', error);
+                                setError(t('parsing-failed-indicators'));
+                            }
+                        }}
+                    />
+                </label>
+            </details>
 
             <div>
                 {error ? (
