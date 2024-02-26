@@ -1,7 +1,3 @@
-// TODO: We can remove those after https://github.com/gohugoio/hugo/pull/12119 is released. Then, they should be picked
-// up automatically from our TSConfig.
-// @jsxImportSource preact
-// @jsxRuntime automatic
 // eslint-disable-next-line import/no-unresolved
 import { baseUrl } from '@params';
 import { Buffer } from 'buffer';

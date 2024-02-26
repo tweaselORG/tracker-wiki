@@ -8,7 +8,7 @@ The live version is hosted at [trackers.tweasel.org](https://trackers.tweasel.or
 
 ## Build
 
-tracker-wiki is build statically using the extended version of [Hugo](https://gohugo.io/) (take a look at [how to install it](https://gohugo.io/installation/)). You need at least version `v0.105.0+extended` to build it yourself.
+tracker-wiki is build statically using the extended version of [Hugo](https://gohugo.io/) (take a look at [how to install it](https://gohugo.io/installation/)). You need at least version `v0.123.3+extended` to build it yourself.
 You'll also need a current version of [Node.js](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/) (or npm).
 
 Then you can run the following to build the HTML:
