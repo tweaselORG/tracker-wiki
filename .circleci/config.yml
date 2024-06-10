@@ -12,7 +12,7 @@ jobs:
       - checkout
       - go/install
       - hugo/install:
-          version: "0.109.0"
+          version: "0.127.0"
       - run:
           command: |
             sudo npm i -g dattel-client
