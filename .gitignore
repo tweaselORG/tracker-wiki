@@ -9,6 +9,7 @@ content/research/*
 !content/**/research/index.md
 
 data/trackharVersion.json
+data/trackharTranslations/
 trackhar_tmp/
 
 tmp/
