@@ -102,7 +102,7 @@
                                         If the reasoning contains an external link, this creates an link to that, if it references a Markdown file in `research`, it links to the corresponding section.
                                     -->
                                     {{ if or (strings.HasPrefix .reasoning "https://") (strings.HasPrefix .reasoning "http://") }}
-                                        <a href="{{ .reasoning }}"><img src="/svg/external.svg" class="inline-icon icon-external" alt="{{ T "tracker-single-transmitted-data-table-reasoning-external-link-desc" }}" title="{{ T "tracker-single-transmitted-data-table-reasoning-external-link-desc" }}" rel="nofollow"></a>
+                                        <a href="{{ .reasoning }}" rel="nofollow"><img src="/svg/external.svg" class="inline-icon icon-external" alt="{{ T "tracker-single-transmitted-data-table-reasoning-external-link-desc" }}" title="{{ T "tracker-single-transmitted-data-table-reasoning-external-link-desc" }}"></a>
                                     {{ else if (strings.HasSuffix .reasoning ".md") }}
                                         {{ $path := .reasoning }}
                                         {{ if not (strings.HasSuffix .reasoning "index.md") }}
