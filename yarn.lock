@@ -3884,10 +3884,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-trackhar@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/trackhar/-/trackhar-0.4.1.tgz#538c30605f273a0b5b7a794f703ba05972f00de1"
-  integrity sha512-WOO9ZGCHYtyAwt1E+5xjvCCOrylSh9HZL32opX4shFG5CXZl/UQaaoFUplAdAoQfF3IMseB9JDo2Z7PbQy/NMg==
+trackhar@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/trackhar/-/trackhar-0.5.1.tgz#d4edc71f44ba819d8e60ef738dd9e1be2896bed6"
+  integrity sha512-DzhLU7quxgDq2KpZFSJmoqm+UCZXgmRfIBeHWGBHqco495dojoZWeH0mzjV7pH/0clseOplmkDUt3S/EIThVEw==
   dependencies:
     "@types/har-format" "^1.2.10"
     base64-search "^1.1.0"

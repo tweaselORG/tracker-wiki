@@ -1,5 +1,6 @@
 {{ define "main" }}
 {{ $urlToArchivedUrl := partialCached "functions/archived-urls.html" "" }}
+{{ $exampleData := index $.Site.Data.adapterExamples (lower (printf "%s/%s" $.Params.tracker.slug $.Params.slug)) }}
 
 <article class="markdown">
     <h1>{{ .Title }} (<code>{{ .Params.tracker.slug }}/{{ .Params.slug }}</code>)</h1>
@@ -112,11 +113,13 @@
                                     {{ end }}
                                 </td>
                                 <td>
-                                    {{ $examples := index $.Site.Data.adapterExamples (lower (printf "%s/%s/%s/%s/%s" $.Params.tracker.slug $.Params.slug $property .context .path)) }}
-                                    {{ if $examples }}
-                                        {{ $examplesArray := cond (eq (printf "%T" $examples) "[]interface {}") $examples (slice $examples) }}
-                                        {{ range $examplesArray | first 5 }}
-                                            <code>{{ . }}</code><br>
+                                    {{ if $exampleData }}
+                                        {{ $examples := index $exampleData (lower (printf "%s/%s/%s" $property .context .path)) }}
+                                        {{ if $examples }}
+                                            {{ $examplesArray := cond (eq (printf "%T" $examples) "[]interface {}") $examples (slice $examples) }}
+                                            {{ range $examplesArray | first 5 }}
+                                                <code>{{ . }}</code><br>
+                                            {{ end }}
                                         {{ end }}
                                     {{ end }}
                                 </td>
