@@ -34,6 +34,9 @@ const trackharVersionFile = 'data/trackharVersion.json';
         }
     }
 
+    // Remove any old data before cloning again.
+    await rm('trackhar_tmp', { recursive: true, force: true });
+
     console.info(`Fetching data for TrackHAR version: ${trackharVersion}`);
     await execa('git', [
         'clone',
@@ -75,8 +78,8 @@ const trackharVersionFile = 'data/trackharVersion.json';
 
     console.info('Generate new example data…');
     await execa('yarn', [], { cwd: 'trackhar_tmp' });
-    // If the server is too slow, we should timeout after 5 minutes
-    await execa('yarn', ['tsx', 'scripts/generate-example-data.ts'], { cwd: 'trackhar_tmp', timeout: 300000 });
+    // If the server is too slow, we should timeout after 10 minutes
+    await execa('yarn', ['tsx', 'scripts/generate-example-data.ts'], { cwd: 'trackhar_tmp', timeout: 600000 });
     await copyFile('trackhar_tmp/research-docs/adapter-examples.json', 'data/adapterExamples.json');
 
     console.info('Cleanup…');
