@@ -1,5 +1,6 @@
 import { execa } from 'execa';
-import { copyFile, cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'fs/promises';
+import { existsSync } from 'fs';
+import { copyFile, cp, mkdir, readFile, readdir, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { adapters, type Tracker } from 'trackhar';
 
@@ -23,7 +24,7 @@ const trackharVersionFile = 'data/trackharVersion.json';
         '--json',
     ]).then(({ stdout }) => JSON.parse(stdout).data.trees[0].name.split('@')[1] as string);
 
-    if (!process.env['FORCE_REGENERATE'] && (await stat(trackharVersionFile))) {
+    if (!process.env['FORCE_REGENERATE'] && existsSync(trackharVersionFile)) {
         const currentVersion = await readFile(trackharVersionFile).then(
             (res) => JSON.parse(res.toString()) as TrackharVersionFile
         );
