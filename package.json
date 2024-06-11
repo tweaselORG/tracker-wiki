@@ -43,7 +43,9 @@
     },
     "prettier": "@baltpeter/prettier-config",
     "dependencies": {
+        "buffer": "^6.0.3",
         "cross-dirname": "^0.1.0",
+        "preact": "^10.19.6",
         "trackhar": "^0.4.1"
     },
     "devDependencies": {
@@ -52,6 +54,7 @@
         "@baltpeter/tsconfig": "3.0.0",
         "@parcel/packager-ts": "2.8.3",
         "@parcel/transformer-typescript-types": "2.8.3",
+        "@types/har-format": "^1.2.15",
         "@types/node": "^18.15.11",
         "@typescript-eslint/eslint-plugin": "5.57.1",
         "eslint": "8.37.0",

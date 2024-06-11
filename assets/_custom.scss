@@ -21,6 +21,12 @@ table.data-table {
         border: $padding-1 solid var(--gray-200);
         text-align: left;
         padding: $padding-8;
+
+        &.value-column {
+            code {
+                word-break: break-all;
+            }
+        }
     }
 }
 
