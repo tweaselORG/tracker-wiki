@@ -81,6 +81,8 @@ const trackharVersionFile = 'data/trackharVersion.json';
     await execa('yarn', [], { cwd: 'trackhar_tmp' });
     // If the server is too slow, we should timeout after 10 minutes
     await execa('yarn', ['tsx', 'scripts/generate-example-data.ts'], { cwd: 'trackhar_tmp', timeout: 600000 });
+    // The data folder might not exist
+    await mkdir('data', { recursive: true });
     await copyFile('trackhar_tmp/research-docs/adapter-examples.json', 'data/adapterExamples.json');
 
     console.info('Cleanup…');
