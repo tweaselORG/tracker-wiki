@@ -15,7 +15,7 @@
 
         {{ T "tracker-single-operated-by" }} <a href="{{ (print "t/" .slug) | absURL }}">{{ .name }}</a>
         {{ if gt (len $detailsLinks) 0 }}
-            ({{ delimit $detailsLinks ", " }})
+            ({{ delimit $detailsLinks ", " | safe.HTML }})
         {{ end }}
     {{ end }}
 
