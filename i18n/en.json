@@ -68,6 +68,10 @@
         "one": "Wrap {{ .input }} in an array if it isn’t one already.",
         "other": "Wrap every element in {{ .mapInput }} in an array if it isn’t one already."
     },
+    "decoding-step-function-split": {
+        "one": "Split the string in {{ .input }} into an array on the separator `{{ .options.separator }}`.",
+        "other": "Split every string in {{ .mapInput }} into an array on the separator `{{ .options.separator }}`."
+    },
     "decoding-step-function-getProperty": {
         "one": "Get the property at JSONPath `{{ .options.path }}` in {{ .input }}.",
         "other": "Get the property at JSONPath `{{ .options.path }}` for every element in {{ .mapInput }}."
