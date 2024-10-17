@@ -64,6 +64,10 @@
         "one": "Decode {{ .input }} as a protocol buffer (Protobuf).",
         "other": "Decode every element in {{ .mapInput }} as a protocol buffer (Protobuf)."
     },
+    "decoding-step-function-decodeJwt": {
+        "one": "Decode {{ .input }} as a JSON Web Token (JWT).",
+        "other": "Decode every element in {{ .mapInput }} as a JSON Web Token (JWT)."
+    },
     "decoding-step-function-ensureArray": {
         "one": "Wrap {{ .input }} in an array if it isn’t one already.",
         "other": "Wrap every element in {{ .mapInput }} in an array if it isn’t one already."
