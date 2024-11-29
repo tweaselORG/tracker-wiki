@@ -273,7 +273,7 @@ const ResultRow = ({ result }: { result: AnnotatedResult[number] }) => {
                 </code>
             </td>
             <td class="value-column">
-                <code>{result.value}</code>
+                <code>{typeof result.value === 'string' ? result.value : JSON.stringify(result.value)}</code>
             </td>
         </tr>
     );

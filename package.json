@@ -46,7 +46,7 @@
         "buffer": "^6.0.3",
         "cross-dirname": "^0.1.0",
         "preact": "^10.19.6",
-        "trackhar": "^0.5.1"
+        "trackhar": "^1.0.0"
     },
     "devDependencies": {
         "@baltpeter/eslint-config": "2.1.2",
